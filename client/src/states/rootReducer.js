@@ -1,0 +1,27 @@
+import appReducer from "./modules/app"
+import authReducer from "./modules/auth"
+import profileReducer from "./modules/profile"
+import homeReducer from "./modules/home"
+import aboutReducer from "./modules/about"
+import employeeReducer from "./modules/employee"
+import userReducer from "./modules/user"
+import authorReducer from "./modules/author"
+import categoryReducer from "./modules/category"
+import postReducer from "./modules/post"
+import postDetailReducer from "./modules/post-detail"
+
+const rootReducer = {
+  app: appReducer,
+  auth: authReducer,
+  profile: profileReducer,
+  home: homeReducer,
+  about: aboutReducer,
+  employee: employeeReducer,
+  user: userReducer,
+  author: authorReducer,
+  category: categoryReducer,
+  post: postReducer,
+  postDetail: postDetailReducer,
+}
+
+export default rootReducer

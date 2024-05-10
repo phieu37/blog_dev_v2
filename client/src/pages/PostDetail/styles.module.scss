@@ -1,0 +1,113 @@
+@import "src/assets/scss/variables";
+
+.postManagementWrap {
+  // background-color: $colorWhite;
+  background: url(../../assets/images/background/paper.PNG) left top repeat;
+  padding: 15px;
+  border-radius: 4px;
+  // background-size: 50px, 130px, auto;
+  .mainWrap {
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.5rem;
+      text-transform: uppercase; 
+    }
+
+    .authorBio{
+      text-transform: capitalize;
+      // text-indent: 20px; 
+      white-space: pre-line;
+    }
+
+    .authorTop {
+      display: flex;
+      align-items: center;
+
+      .authorName {
+        text-transform: capitalize;
+      }
+
+      .authorImage{
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin-right: 16px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .content {
+      display: flex;
+      padding-top: 20px;
+      margin-bottom: 40px;
+      min-height: 200px;
+
+      .post {
+        flex: 2;
+        
+        .thumbnail {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .authorCategories {
+        flex: 1;
+        margin: 0 15px;
+
+        h2 {
+          font-weight: bold;
+          font-size: 1rem;
+          text-transform: uppercase; 
+          margin-bottom: 10px;
+        }
+      }
+      .author {
+        display: flex;
+        .contentOne{
+          flex: 1;
+        }
+        .contentTwo {
+          flex: 2;
+
+          .authorSpan {
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-transform: uppercase; 
+          }
+        }
+        .authorName {
+          text-transform: capitalize;
+        }
+        .authorEmail {
+        }
+        .authorBio{
+          text-transform: capitalize;
+          text-indent: 20px; 
+        }
+        .authorBirthday {
+        }
+      }
+      .categories {
+        .categoriesName {
+          text-transform: capitalize;
+        }
+      }
+    }
+
+    .separator {
+      border-bottom: 1px dashed black;
+      margin: 40px 0;
+    }
+
+
+  }
+}

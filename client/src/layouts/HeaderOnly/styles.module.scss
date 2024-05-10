@@ -1,0 +1,7 @@
+.imgLogo {
+  @apply absolute w-[240px] top-[-15px] left-[40px] z-20 cursor-pointer;
+  @media only screen and (max-width: 899px) {
+    @apply left-[-30px];
+  }
+
+}

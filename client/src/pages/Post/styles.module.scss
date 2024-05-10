@@ -1,0 +1,133 @@
+@import "src/assets/scss/variables";
+
+.postManagementWrap {
+  background: $colorWhite;
+  padding: 10px;
+  border-radius: 4px;
+  .mainWrap {
+    .headerMainWrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+
+      .title {
+        font-size: 20px;
+        font-weight: 500;
+      }
+
+      .btnWrap {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        font-size: 14px;
+        font-weight: 500;
+        position: relative;
+
+        span {
+          width: 60px;
+          display: flex;
+          justify-content: flex-end;
+        }
+
+        .btnWrapIcon {
+          z-index: 1;
+          display: flex;
+          position: absolute;
+          left: 0;
+          align-items: center;
+          color: white;
+          transform: translateX(-30%);
+          font-size: 19px;
+        }
+
+        // .btnSave {
+        //   min-width: 80px;
+        //   border: none;
+        //   background-color: $mainColor;
+        // }
+      }
+    }
+
+    .boxFilterWrap {
+      margin-bottom: 2px;
+      display: flex;
+      justify-content: flex-start;
+      width: 100%;
+
+      .inputWrap {
+        width: 100%;
+        position: relative;
+        margin-right: 10px;
+
+        input {
+          border: 1px solid $colorBorderInput;
+          border-radius: 3px;
+          padding-right: 40px;
+        }
+
+        svg {
+          position: absolute;
+          top: 16px;
+          right: 15px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.nameWrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  .imgWrap {
+    img {
+      width: 80px;
+      height: 80px;
+      -o-object-fit: cover;
+      object-fit: cover;
+    }
+  }
+}
+
+.btnAction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .btnWrap {
+    display: flex;
+    cursor: pointer;
+
+    img {
+      cursor: pointer;
+    }
+
+    .btnWrapImg {
+    }
+
+    img:hover {
+      opacity: 0.7;
+    }
+
+    &:last-child {
+      img {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.limitedHeight {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  /* Chỉ hiển thị tối đa 3 dòng */
+  overflow: hidden;
+  /* Ẩn phần nội dung vượt quá 3 dòng */
+  max-height: 5em;
+  /* Chiều cao tối đa tương ứng với 3 dòng */
+  text-overflow: ellipsis;
+  /* Hiển thị dấu ... khi nội dung bị cắt */
+}
