@@ -37,7 +37,11 @@ router.put(
     asyncHandler(userController.updateItem),
 );
 
-router.delete("/:id", asyncHandler(userMiddleware.checkUserId), asyncHandler(userController.removeItem));
+router.delete(
+    "/:id", 
+    asyncHandler(userMiddleware.checkUserId), 
+    asyncHandler(userController.removeItem)
+);
 
 // router.patch(
 //     "/change-password/",

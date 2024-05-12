@@ -15,6 +15,7 @@ import moment from "moment"
 import dayjs from "dayjs"
 import { Button, Input, Upload } from "antd"
 import { UploadOutlined } from "@ant-design/icons"
+import CustomCKEditor from '../../../../components/Ckeditor5';
 
 CreateOrUpdate.prototype = {
   isModalOpen: PropTypes.bool.isRequired,
@@ -106,6 +107,14 @@ function CreateOrUpdate(props) {
     let data = _.cloneDeep(dataCreateOrUpdate)
     data[type] = value
     setDataCreateOrUpdate(data)
+  }
+
+  const handleCKEditorChange = (event, editor) => {
+    const data = editor.getData();
+    setDataCreateOrUpdate(prevData => ({
+      ...prevData,
+      bio: data
+    }));
   }
 
   const validateBlur = (type) => {
@@ -217,12 +226,10 @@ function CreateOrUpdate(props) {
 
         <div className={styles.inputWrapper}>
           <div className={styles.label}>Bio</div>
-          <Input.TextArea
-            type={"text"}
+          <CustomCKEditor
             placeholder={"Enter bio..."}
-            onChange={(e) => handleChangeInput(e, "bio")}
-            // onBlur={() => validateBlur("bio")}
-            value={dataCreateOrUpdate.bio}
+            onChange={handleCKEditorChange}
+            // value={dataCreateOrUpdate.bio}
             error={errorCreateOrUpdateAuthor.bio}
           />
         </div>

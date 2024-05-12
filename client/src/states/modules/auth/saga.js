@@ -44,7 +44,7 @@ function* handleActions() {
     } else {
       getNotification('error', 'Có lỗi xảy ra, vui lòng thử lại sau!');
     }
-  });
+  })
 }
 
 export default function* loadAuthSaga() {

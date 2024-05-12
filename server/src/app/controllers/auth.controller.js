@@ -34,6 +34,11 @@ export async function updateProfile(req, res) {
     return responseSuccess(res, null, 201);
 }
 
+export async function updateAvatarProfile(req, res) {
+    await authService.updateAvatarProfile(req.currentUser, req.body);
+    return responseSuccess(res, null, 201);
+}
+
 export async function changePassword(req, res) {
     await resetPassword(req.currentUser, req.body.new_password);
     return responseSuccess(res, null, 201);

@@ -96,3 +96,15 @@ export async function updateProfile(currentUser, {name, email, phone, avatar}) {
 
     return await currentUser.save();
 }
+
+export async function updateAvatarProfile(currentUser, {avatar}) {
+    if (avatar) {
+        if (currentUser.avatar) {
+            FileUpload.remove(currentUser.avatar);
+        }
+        avatar = avatar.save("images");
+        currentUser.avatar = avatar;
+    }
+
+    return await currentUser.save();
+}

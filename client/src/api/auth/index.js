@@ -38,8 +38,8 @@ export const register = (data) => async (dispatch, getState) => {
     variables: {
       name: data.name,
       email: data.email,
-      password: data.password,
       phone: data.phone,
+      password: data.password,
       address: data.address,
     },
     dispatch,

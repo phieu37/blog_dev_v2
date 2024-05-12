@@ -94,6 +94,19 @@ export const register = Joi.object({
     // ),
 });
 
+export const updateAvatarProfile = Joi.object({
+    avatar: Joi.object({
+        originalname: Joi.string().trim().required().label("Tên ảnh"),
+        mimetype: Joi.valid("image/jpeg", "image/png", "image/svg+xml", "image/webp")
+            .required()
+            .label("Định dạng ảnh"),
+        buffer: Joi.binary().required().label("Ảnh đại diện"),
+    })
+        .instance(FileUpload)
+        .allow("")
+        .label("Ảnh đại diện")
+});
+
 export const updateProfile = Joi.object({
     name: Joi.string()
         .trim()
