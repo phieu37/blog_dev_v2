@@ -7,7 +7,8 @@ import {
   changePasswordSuccess, setErrorChangePassword,
   setErrorInfoUser,
   updateInfoUserFail,
-  updateInfoUserSuccess
+  updateInfoUserSuccess,
+  changeAvatarSuccess,
 } from "./index";
 import {getNotification} from "../../../utils/helper";
 import {getMe} from "../../../api/auth";
@@ -62,6 +63,11 @@ function* handleActions () {
       }));
     }
     getNotification('error', 'Change password fail');
+  });
+
+  yield takeLatest(changeAvatarSuccess, function* () {
+    yield call(getNotification, 'success', 'Change avatar success');
+    yield put(getMe());
   });
 }
 

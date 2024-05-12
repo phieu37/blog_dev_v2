@@ -14,6 +14,9 @@ const profileSlice = createSlice({
       newPassword: '',
       confirmPassword: ''
     },
+    errorChangeAvatar: {
+      avatar: '',
+    },
     loadingBtnChangePassword: false,
   },
   reducers: {
@@ -49,10 +52,25 @@ const profileSlice = createSlice({
       ...state,
       loadingBtnChangePassword: false
     }),
+    changeAvatar: (state) => ({
+      ...state,
+      loadingBtnChangeAvatar: true
+    }),
+    changeAvatarSuccess: (state) => ({
+      ...state,
+      loadingBtnChangeAvatar: false
+    }),
+    changeAvatarFail: (state) => ({
+      ...state,
+      loadingBtnChangeAvatar: false
+    }),
   }
 })
 
 export const {
+  changeAvatar,
+  changeAvatarSuccess,
+  changeAvatarFail,
   setErrorInfoUser,
   setErrorChangePassword,
   updateInfoUser, updateInfoUserSuccess, updateInfoUserFail,

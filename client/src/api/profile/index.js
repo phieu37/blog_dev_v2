@@ -1,5 +1,8 @@
 import callApi from "../callApi"
 import {
+  changeAvatarFail,
+  changeAvatarSuccess,
+  changeAvatar,
   changePassword,
   changePasswordFail,
   changePasswordSuccess,
@@ -16,6 +19,17 @@ export const handleUpdateInfoUser = (data) => async (dispatch, getState) => {
     variables: data,
     dispatch,
     getState,
+  })
+}
+
+export const updateAvatarProfile = (data) => async (dispatch, getState) => {
+  return callApi({
+    method: 'post',
+    apiPath: `auth/me/avatar`,
+    actionTypes: [changeAvatar, changeAvatarSuccess, changeAvatarFail],
+    variables: data,
+    dispatch,
+    getState
   })
 }
 

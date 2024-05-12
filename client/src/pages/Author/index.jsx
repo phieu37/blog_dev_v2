@@ -19,6 +19,7 @@ import AuthorImg from '../../assets/images/user/avatar_default.jpg';
 // import BtnFilter from "../../components/ButtonFilter";
 import { PlusOutlined } from '@ant-design/icons';
 import { formatDate } from '../../utils/helper';
+import parse from 'html-react-parser'
 
 function Author() {
   // lấy thông tin người dùng hiện tại từ Redux store(từ state authAuthor trong reducer auth)
@@ -54,7 +55,7 @@ function Author() {
       title: 'Bio',
       dataIndex: 'bio',
       key: 'bio',
-      render: (field) => <span className={styles.limitedHeight}>{field || "Đang cập nhật"}</span>,
+      render: (field) => <span className={styles.limitedHeight}>{parse(field) || "Đang cập nhật"}</span>,
       defaultSortOrder: '',
       showSorterTooltip: false,
       width: '350px',

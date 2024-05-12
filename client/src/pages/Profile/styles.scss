@@ -1,2 +1,12 @@
 @import "src/assets/scss/variables";
 
+.ant-image {
+  display: block;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+}
+
+.ant-image-mask {
+  border-radius: 50%;
+  transform: translate(10%, 10%);
+}

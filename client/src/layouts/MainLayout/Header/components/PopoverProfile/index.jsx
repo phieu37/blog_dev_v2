@@ -11,15 +11,13 @@ function PopoverProfile() {
     <div className={styles.modalInfoWrap}>
       <div className={styles.personalInformationWrap}>
         <div className={styles.name}>
-          {/* Doan Tien Dat */}
           {authUser.name}
         </div>
         <div className={styles.role}>
-          {/* Super Admin */}
           {authUser.email || 'Chưa cập nhật'}
         </div>
       </div>
-      {/* bottom */}
+
       <div className={styles.mainModalInfoWrap}>
         <ul className={styles.menuInfoWrap}>
           <li
@@ -34,7 +32,6 @@ function PopoverProfile() {
             <span className={styles.text}>Profile</span>
           </li>
 
-          {/* logout */}
           <li
             // onClick={() => navigate('/login')}
             onClick={() => handleConfirmLogout()}

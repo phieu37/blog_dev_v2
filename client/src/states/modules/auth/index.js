@@ -9,14 +9,14 @@ const authSlice = createSlice({
     isAuthSuccess: false, // không có người dùng nào được xác thực
     authUser: {}, // không có thông tin user nào được lưu
     authAuthor: {}, // không có thông tin author nào được lưu
-    errorRegister: {
+    errorAuth: {
       name: "",
       email: "",
       phone: "",
       address: "",
       password: "",
       confirmPassword: "",
-      // avatar: "",
+      avatar: "",
     },
     isLoadingBtnLogin: false,
     isLoadingBtnRegister: false,
@@ -24,6 +24,10 @@ const authSlice = createSlice({
   // reducers được định nghĩa dưới dạng hàm, mỗi hàm sẽ xử lý một/nhiều hành động và
   // trả về một trạng thái mới cho slice
   reducers: {
+    setErrorAuth: (state, action) => ({
+      ...state,
+      errorAuth: action.payload,
+    }),
     // 3 cái xử lý các hành động liên quan đến quá trình đăng nhập
     // thay đổi trạng thái của isLoadingBtnLogin để hiển thị trạng thái của nút đăng nhập
     startRequestLogin: (state) => ({
@@ -72,6 +76,7 @@ const authSlice = createSlice({
 
 // Xuất actions của slice để sử dụng trong việc dispatch các hành động từ các thành phần khác
 export const {
+  setErrorAuth,
   startRequestLogin,
   startRequestLoginSuccess,
   startRequestLoginFail,

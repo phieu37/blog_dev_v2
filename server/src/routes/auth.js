@@ -40,6 +40,14 @@ router.put(
     asyncHandler(authController.updateProfile),
 );
 
+router.post(
+    "/me/avatar",
+    asyncHandler(verifyToken),
+    asyncHandler(upload),
+    asyncHandler(validate(authRequest.updateAvatarProfile)),
+    asyncHandler(authController.updateAvatarProfile),
+);
+
 router.patch(
     "/change-password",
     asyncHandler(upload),
