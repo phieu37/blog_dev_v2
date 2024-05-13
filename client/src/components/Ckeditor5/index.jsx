@@ -1,12 +1,38 @@
 import React from 'react';
-import { Editor, EditorConfig } from 'ckeditor5-custom-build/build/ckeditor';
+import { Editor } from 'ckeditor5-custom-build/build/ckeditor';
 import { CKEditor } from '@ckeditor/ckeditor5-react'
+import './styles.scss';
+import styles from './styles.module.scss';
 
 const CustomCKEditor = (props) => {
     const editorConfiguration = {
+        fontSize: {
+            options: [
+                9,
+                10,
+                11,
+                12,
+                13,
+                'default',
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                26,
+                28,
+                36,
+                48,
+                72,
+            ]
+        },
         toolbar: {
             items: [
-                // 'exportPDF', 'exportWord', '|',
                 'findAndReplace', 'selectAll', '|',
                 'heading', '|',
                 'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
@@ -23,6 +49,7 @@ const CustomCKEditor = (props) => {
             ],
             // shouldNotGroupWhenFull: true
         },
+        placeholder: 'Content here...',
         language: 'en',
         image: {
             toolbar: [
@@ -52,9 +79,8 @@ const CustomCKEditor = (props) => {
 
     return (
         <>
-            <div className='card'>
-                {/* begin::Editor */}
-                <div className='mx-auto'>
+            <div className={styles.mainWrap}>
+                <div className={styles.begin}>
                     <CKEditor
                         editor={Editor} // phiên bản của CKEditor đang sử dụng
                         config={editorConfiguration}
@@ -62,23 +88,8 @@ const CustomCKEditor = (props) => {
                         onChange={props.onChange} // cập nhật nội dung mới vào state 
                         value={props.value}
                         errors={props.errors}
-                    // onReady={editor => {
-                    //     // You can store the "editor" and use when it is needed.
-                    //     console.log('Editor is ready to use!', editor);
-                    // }}
-                    // onChange={(event, editor) => {
-                    //     const data = editor.getData();
-                    //     console.log({ event, editor, data });
-                    // }}
-                    // onBlur={(event, editor) => {
-                    //     console.log('Blur.', editor);
-                    // }}
-                    // onFocus={(event, editor) => {
-                    //     console.log('Focus.', editor);
-                    // }}
                     />
                 </div>
-                {/* end::Editor */}
             </div>
         </>
     )
