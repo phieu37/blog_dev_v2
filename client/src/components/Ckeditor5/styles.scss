@@ -1,0 +1,43 @@
+@import "../../assets/scss/variables";
+
+h1.ck-placeholder {
+  display: none;
+}
+p:first-child {
+  margin-top: 12.6px;
+}
+
+p.ck-placeholder {
+  margin-top: 12.6px;
+}
+
+.ck-editor__editable_inline {
+  min-height: 200px;
+}
+
+// .ck.fullscreen-mode .ck.ck-editor__main {
+//   height: 100% !important;
+//   resize: none !important;
+//   max-height:100% !important;
+//   overflow: scroll;
+// }
+
+// .ck-editor {
+//   height: 100% !important;
+//   display: flex;
+//   flex-direction: column;
+// }
+// .ck-editor .ck-editor__top {
+//   flex-shrink: 1;
+// }
+// .ck-editor .ck-editor__main {
+//   flex-grow: 1;
+//   position: relative;
+// }
+// .ck-editor .ck-editor__main .ck-editor__editable, .ck-editor .ck-editor__main .ck-source-editing-area {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+// }
