@@ -122,24 +122,3 @@
     }
   }
 }
-
-.btnAction {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .btnWrap {
-    display: flex;
-
-    img {
-      cursor: pointer;
-      margin-right: 12px;
-    }
-
-    &:last-child {
-      img {
-        margin-right: 0;
-      }
-    }
-  }
-}

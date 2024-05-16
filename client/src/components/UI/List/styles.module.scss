@@ -1,0 +1,29 @@
+.tableWrap {
+  .table {
+    margin-bottom: 17px;
+  }
+
+  .paginationWrap {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    .textPagination {
+      font-size: 15px;
+    }
+  }
+}
+
+.limitedHeight {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  /* Chỉ hiển thị tối đa 3 dòng */
+  overflow: hidden;
+  /* Ẩn phần nội dung vượt quá 3 dòng */
+  max-height: 5em;
+  /* Chiều cao tối đa tương ứng với 3 dòng */
+  text-overflow: ellipsis;
+  /* Hiển thị dấu ... khi nội dung bị cắt */
+}

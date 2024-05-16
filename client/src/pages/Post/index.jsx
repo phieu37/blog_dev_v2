@@ -129,7 +129,7 @@ function Post() {
   const dispatch = useDispatch();
 
   const [post, setPost] = useState({}); // thông tin post được chọn để xóa
-  const [config, setConfig] = useState({type: ''})// cấu hình tạo/cập nhật
+  const [config, setConfig] = useState({ type: '' })// cấu hình tạo/cập nhật
   const [dataFilter, setDataFilter] = useState({  // lọc và phân trang
     keySearch: '',
     status: '',
@@ -146,7 +146,7 @@ function Post() {
   const handleCreate = () => {
     setIsCreating(true);
     setPost({})
-    setConfig({type: "CREATE"})
+    setConfig({ type: "CREATE" })
     dispatch(setVisibleModalCreateOrUpdatePost(true))
     dispatch(getListAuthor({
       perPage: 100,
@@ -162,7 +162,7 @@ function Post() {
     let postSelect = _.cloneDeep(post)
     setIsCreating(true);
     setPost(postSelect)
-    setConfig({type: "UPDATE"})
+    setConfig({ type: "UPDATE" })
     dispatch(setVisibleModalCreateOrUpdatePost(true))
     dispatch(getListAuthor({
       perPage: 100,

@@ -13,6 +13,7 @@ import {
   deleteCategorySuccess,
   deleteCategoryFail,
 } from "../../states/modules/category"
+import { getDetailCategory, getDetailCategoryFail, getDetailCategorySuccess } from "../../states/modules/category-detail"
 
 // Tạo các action 
 export const getListCategory = (dataFilter = { perPage: 5, page: 1 }) => async (dispatch, getState) => {
@@ -70,6 +71,17 @@ export const handleUpdateCategory = (data, idCategory) => async (dispatch, getSt
     apiPath: `categories/${idCategory}`,
     actionTypes: [updateCategory, updateCategorySuccess, updateCategoryFail],
     variables: data,
+    dispatch,
+    getState,
+  })
+}
+
+export const handleGetCategoryDetail = (idCategory) => async (dispatch, getState) => {
+  return callApi({
+    method: "get",
+    apiPath: `categories/${idCategory}`,
+    actionTypes: [getDetailCategory, getDetailCategorySuccess, getDetailCategoryFail],
+    variables: {},
     dispatch,
     getState,
   })

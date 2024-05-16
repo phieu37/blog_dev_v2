@@ -7,6 +7,7 @@ import employeeReducer from "./modules/employee"
 import userReducer from "./modules/user"
 import authorReducer from "./modules/author"
 import categoryReducer from "./modules/category"
+import categoryDetailReducer from "./modules/category-detail"
 import postReducer from "./modules/post"
 import postDetailReducer from "./modules/post-detail"
 
@@ -22,6 +23,7 @@ const rootReducer = {
   category: categoryReducer,
   post: postReducer,
   postDetail: postDetailReducer,
+  categoryDetail: categoryDetailReducer,
 }
 
 export default rootReducer

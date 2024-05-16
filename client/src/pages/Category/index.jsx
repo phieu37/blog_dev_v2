@@ -7,6 +7,7 @@ import InputMASQ from "../../components/UI/Input";
 import ButtonMASQ from "../../components/UI/Button";
 import IconDeleteTable from "../../assets/images/icon/table/delete_14x14.svg";
 import IconEditTable from "../../assets/images/icon/table/edit_12x12.svg";
+import IconDetailTable from "../../assets/images/icon/show_password.svg";
 // import SwitchMASQ from "../../components/UI/Switch";
 import CreateOrUpdate from "./components/CreateOrUpdate";
 import ModalConfirm from "../../components/UI/Modal/ModalConfirm";
@@ -19,14 +20,16 @@ import {
 import _ from "lodash";
 // import Filter from './components/Filter';
 // import BtnFilter from "../../components/ButtonFilter";
-import { 
+import {
   // EyeOutlined, 
-  PlusOutlined } from '@ant-design/icons';
+  PlusOutlined
+} from '@ant-design/icons';
 import { Tooltip } from 'antd';
+import { useNavigate } from 'react-router-dom';
 // import { useNavigate } from 'react-router-dom';
 
 function Category() {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   // lấy thông tin người dùng hiện tại từ Redux store(từ state authCategory trong reducer auth)
   const authAuthor = useSelector(state => state.auth.authAuthor);
   // mảng chứa các cấu hình cho từng cột trong bảng dữ liệu
@@ -54,7 +57,7 @@ function Category() {
       key: 'action',
       fixed: 'right',
       align: 'center',
-      width: '80px',
+      width: '120px',
       render: (field, record) => (
         <>
           {
@@ -75,13 +78,13 @@ function Category() {
                     </Tooltip>
                   </div>
                 }
-                {/* {
-                  <Tooltip title="DetailPost">
-                    <div onClick={() => navigate(`/categories/:categoryId`)} className={styles.btnWrap}>
-                      <EyeOutlined />
+                {
+                  <Tooltip title="Detail">
+                    <div onClick={() => navigate(`/categories/${record._id}`)} className={styles.btnWrap}>
+                      <img className={styles.btnWrapImg} src={IconDetailTable} alt="icon-delete" />
                     </div>
                   </Tooltip>
-                } */}
+                }
               </div> : ''
           }
         </>
