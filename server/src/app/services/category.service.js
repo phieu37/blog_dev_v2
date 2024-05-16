@@ -39,6 +39,118 @@ export async function filter({q, page, per_page, field, sort_order}) {
     return {total, page, per_page, categories};
 }
 
+// export async function details(currentCategory) {
+//     const categoryDetails = await Category.aggregate([
+//         {
+//             $match: { _id: currentCategory._id },
+//         },
+//         {
+//             $lookup: {
+//                 from: "posts",
+//                 localField: "post_ids",
+//                 foreignField: "_id",
+//                 as: "posts",
+//             },
+//         },
+//         {
+//             $unwind: {
+//                 path: "$posts",
+//                 preserveNullAndEmptyArrays: true,
+//             },
+//         },
+//         {
+//             $lookup: {
+//                 from: "authors",
+//                 localField: "posts.author_id",
+//                 foreignField: "_id",
+//                 as: "author",
+//             },
+//         },
+//         {
+//             $unwind: {
+//                 path: "$author",
+//                 preserveNullAndEmptyArrays: true,
+//             },
+//         },
+//         {
+//             $project: {
+//                 _id: 1,
+//                 name: 1,
+//                 description: 1,
+//                 created_at: 1,
+//                 updated_at: 1,
+//                 post: {
+//                     _id: "$posts._id",
+//                     title: "$posts.title",
+//                     content: "$posts.content",
+//                     thumbnail: {
+//                         $cond: {
+//                             if: { $ne: ["$posts.thumbnail", ""] },
+//                             then: { $concat: [LINK_STATIC_URL, "$posts.thumbnail"] },
+//                             else: "",
+//                         },
+//                     },
+//                     author: {
+//                         $cond: {
+//                             if: { $ne: ["$author", []] },
+//                             then: {
+//                                 _id: "$author._id",
+//                                 name: "$author.name",
+//                                 email: "$author.email",
+//                                 bio: "$author.bio",
+//                                 birthday: "$author.birthday",
+//                                 avatar: {
+//                                     $cond: {
+//                                         if: { $ne: ["$author.avatar", ""] },
+//                                         then: { $concat: [LINK_STATIC_URL, "$author.avatar"] },
+//                                         else: "",
+//                                     },
+//                                 },
+//                                 created_at: "$author.created_at",
+//                                 updated_at: "$author.updated_at",
+//                             },
+//                             else: null,
+//                         },
+//                     },
+//                     created_at: "$posts.created_at",
+//                     updated_at: "$posts.updated_at",
+//                 }
+//             },
+//         },
+//         {
+//             $match: {
+//                 "post.thumbnail": { $ne: null },
+//                 "post.author.avatar": { $ne: null }
+//             }
+//         },
+//         {
+//             $group: {
+//                 _id: "$_id",
+//                 name: { $first: "$name" },
+//                 description: { $first: "$description" },
+//                 created_at: { $first: "$created_at" },
+//                 updated_at: { $first: "$updated_at" },
+//                 posts: { $push: "$post" },
+//             },
+//         },
+//         {
+//             $project: {
+//                 _id: 1,
+//                 name: 1,
+//                 description: 1,
+//                 created_at: 1,
+//                 updated_at: 1,
+//                 posts: {
+//                     $ifNull: ["$posts", []],
+//                 },
+//             },
+//         },
+//     ]);
+
+
+//     return categoryDetails?.[0];
+// }
+
 export async function details(currentCategory) {
     const categoryDetails = await Category.aggregate([
         {
@@ -73,6 +185,24 @@ export async function details(currentCategory) {
             },
         },
         {
+            $addFields: {
+                "posts.thumbnail": {
+                    $cond: {
+                        if: { $ne: ["$posts.thumbnail", ""] },
+                        then: { $concat: [LINK_STATIC_URL, "$posts.thumbnail"] },
+                        else: "",
+                    },
+                },
+                "author.avatar": {
+                    $cond: {
+                        if: { $ne: ["$author.avatar", ""] },
+                        then: { $concat: [LINK_STATIC_URL, "$author.avatar"] },
+                        else: "",
+                    },
+                },
+            },
+        },
+        {
             $group: {
                 _id: "$_id",
                 name: { $first: "$name" },
@@ -84,34 +214,16 @@ export async function details(currentCategory) {
                         _id: "$posts._id",
                         title: "$posts.title",
                         content: "$posts.content",
-                        thumbnail: {
-                            $cond: {
-                                if: { $ne: ["$posts.thumbnail", ""] },
-                                then: { $concat: [LINK_STATIC_URL, "$posts.thumbnail"] },
-                                else: "",
-                            },
-                        },
+                        thumbnail: "$posts.thumbnail",
                         author: {
-                            $cond: {
-                                if: { $ne: ["$author", []] }, // Kiểm tra nếu tác giả không tồn tại
-                                then: {
-                                    _id: "$author._id",
-                                    name: "$author.name",
-                                    email: "$author.email",
-                                    bio: "$author.bio",
-                                    birthday: "$author.birthday",
-                                    avatar: {
-                                        $cond: {
-                                            if: { $ne: ["$author.avatar", ""] },
-                                            then: { $concat: [LINK_STATIC_URL, "$author.avatar"] },
-                                            else: "",
-                                        },
-                                    },
-                                    created_at: "$author.created_at",
-                                    updated_at: "$author.updated_at",
-                                },
-                                else: null, // Trả về null nếu không có tác giả
-                            },
+                            _id: "$author._id",
+                            name: "$author.name",
+                            email: "$author.email",
+                            bio: "$author.bio",
+                            birthday: "$author.birthday",
+                            avatar: "$author.avatar",
+                            created_at: "$author.created_at",
+                            updated_at: "$author.updated_at",
                         },
                         created_at: "$posts.created_at",
                         updated_at: "$posts.updated_at",
@@ -127,10 +239,15 @@ export async function details(currentCategory) {
                 created_at: 1,
                 updated_at: 1,
                 posts: {
-                    $cond: {
-                        if: { $eq: [{ $type: "$posts" }, "array"] }, // Kiểm tra nếu posts là một mảng
-                        then: "$posts",
-                        else: [], // Trả về một mảng rỗng nếu không có bài viết
+                    $filter: {
+                        input: "$posts",
+                        as: "post",
+                        cond: { 
+                            $and: [
+                                { $ne: ["$$post.thumbnail", null] },
+                                { $ne: ["$$post.author.avatar", null] }
+                            ]
+                        },
                     },
                 },
             },
@@ -139,6 +256,7 @@ export async function details(currentCategory) {
 
     return categoryDetails?.[0];
 }
+
 
 export async function update(category, {name, description, post_ids}) {
     category.name = name;

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import {
   MenuFoldOutlined
 } from "@ant-design/icons";
-import Logo from '../../../assets/images/logo/zent_logo_dark.png';
-import IconLogo from '../../../assets/images/logo/icon_zent.png';
+import Logo from '../../../assets/images/logo/logo_blog.png';
+import IconLogo from '../../../assets/images/logo/h2o.png';
 import NavItem from "./components/NavItem";
 import {routeMap} from "../../../router/routeMap";
 import {handleCheckRoute} from "../../../utils/helper";
