@@ -1,42 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import CustomCKEditor from '../../../../components/Ckeditor5';
 import styles from "./styles.module.scss";
 import InputMASQ from "../../../../components/UI/Input";
 import ButtonMASQ from "../../../../components/UI/Button";
 import _ from "lodash";
 // import { isValidate } from "../../../../utils/validate";
 import { handleCheckValidateConfirm } from "../../../../utils/helper";
-import ModalGeneral from "../../../../components/UI/Modal/ModalGeneral";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setErrorCreateOrUpdatePost,
-  setVisibleModalCreateOrUpdatePost
-} from "../../../../states/modules/post";
+import { setErrorCreateOrUpdatePost } from "../../../../states/modules/post";
 import { handleCreatePost, handleUpdatePost } from "../../../../api/post";
 import { Button, Select, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import CustomCKEditor from '../../../../components/Ckeditor5';
 
-CreateOrUpdate.prototype = {
-  isModalOpen: PropTypes.bool.isRequired,
-  isLoadingTable: PropTypes.bool.isRequired,
-  configModal: PropTypes.object.isRequired,
-  onClose: PropTypes.func,
-  onConfirm: PropTypes.func,
-}
-
-CreateOrUpdate.defaultProps = {
-  isModalOpen: false,
-  isLoadingTable: false,
-  textBtnConfirm: 'OK',
-  configModal: {
-    title: 'Title',
-    type: 'CREATE',
-  }
-}
-
-function CreateOrUpdate(props) {
-  let { post, configModal } = props
+function CreatePost(props) {
+  let { post, config, onSave } = props
   const visibleModalCreateOrUpdatePost = useSelector(state => state.post.visibleModalCreateOrUpdatePost);
   const isLoadingBtnCreateOrUpdatePost = useSelector(state => state.post.isLoadingBtnCreateOrUpdatePost);
   const errorCreateOrUpdatePost = useSelector(state => state.post.errorCreateOrUpdatePost);
@@ -123,7 +101,7 @@ function CreateOrUpdate(props) {
       data.append(`thumbnail`, avatarFile.originFileObj)
     }
 
-    if (configModal.type !== "CREATE") {
+    if (config.type !== "CREATE") {
       dataValidate = {
         title: dataCreateOrUpdate.title,
         content: dataCreateOrUpdate.content,
@@ -136,12 +114,18 @@ function CreateOrUpdate(props) {
     let validate = handleCheckValidateConfirm(dataValidate, errorCreateOrUpdatePost);
     dispatch(setErrorCreateOrUpdatePost(validate.dataError));
     if (!validate.isError) {
-      if (configModal.type === "CREATE") {
+      if (config.type === "CREATE") {
         dispatch(handleCreatePost(data))
+        onSave();
       } else {
         dispatch(handleUpdatePost(data, post._id))
+        onSave();
       }
     }
+  }
+
+  const handleCancel = () =>{
+    onSave();
   }
 
   const handleAvatarUpload = (info) => {
@@ -201,12 +185,77 @@ function CreateOrUpdate(props) {
   };
 
   return (
-    <ModalGeneral
-      isModalOpen={visibleModalCreateOrUpdatePost}
-      onClose={() => dispatch(setVisibleModalCreateOrUpdatePost(false))}
-      configModal={configModal}
-    >
+    <div className={styles.postManagementWrap}>
       <div className={styles.mainModalWrap}>
+
+        <div className={styles.wrapperAuthorCategory}>
+          <div className={styles.inputWrapper}>
+            <div className={styles.label}>Thumbnail</div>
+            <Upload
+              beforeUpload={() => false}
+              onChange={handleAvatarUpload}
+              fileList={avatarFileList}
+            >
+              <Button icon={<UploadOutlined />}>Click to Upload</Button>
+            </Upload>
+          </div>
+
+          {/* <div className={styles.inputWrapper}> */}
+            <ButtonMASQ
+              textBtn={'Cancel'}
+              loading={isLoadingBtnCreateOrUpdatePost}
+              onClick={() => handleCancel()}
+              disable={false}
+              style={{
+                minWidth: "120px",
+                marginRight:"10px",
+                marginTop:"-40px"
+              }}
+            />
+            <ButtonMASQ
+              textBtn={'Save'}
+              loading={isLoadingBtnCreateOrUpdatePost}
+              onClick={() => handleConfirmCreateOrUpdatePost()}
+              disable={false}
+              style={{
+                minWidth: "120px",
+                marginRight:"10px",
+                marginTop:"-40px"
+              }}
+            />
+          {/* </div> */}
+        </div>
+
+        <div className={styles.wrapperAuthorCategory}>
+          <div className={styles.inputWrapper}>
+            <div className={styles.label}>Author *</div>
+            <Select
+              placeholder={"Enter author..."}
+              style={{ width: '50%' }}
+              allowClear
+              value={dataCreateOrUpdate.author?._id}
+              onChange={handleChangeAuthors}
+              options={options}
+            // error={errorCreateOrUpdatePost.author?._id}
+            />
+          </div>
+
+          <div className={styles.inputWrapper}>
+            <div className={styles.label}>Category *</div>
+            <Select
+              placeholder={"Enter category..."}
+              mode="multiple"
+              style={{ width: '50%' }}
+              allowClear
+              value={dataCreateOrUpdate.categories}
+              onChange={handleChangeCategorys}
+              // onBlur={() => validateBlur('categories')}
+              options={optionsMultiple}
+            // error={errorCreateOrUpdatePost.categories}
+            />
+          </div>
+        </div>
+
         <div className={styles.inputWrapper}>
           <div className={styles.label}>Title *</div>
           <InputMASQ
@@ -219,72 +268,23 @@ function CreateOrUpdate(props) {
           />
         </div>
 
-        <div className={styles.inputWrapper}>
-          <div className={styles.label}>Content *</div>
+        <div >
+          <div className={styles.inputWrapperContent}>
+            <div className={styles.label}>Content *</div>
+          </div>
           <CustomCKEditor
+            // onMouseDown={(e) => e.preventDefault()}
             data={dataCreateOrUpdate.content || ''}
-            onChange={handleCKEditorChange} 
+            onChange={handleCKEditorChange}
             errors={errorCreateOrUpdatePost.content}
           />
           {/* {errorCreateOrUpdatePost.content && <div className={styles.error}>{errorCreateOrUpdatePost.content}</div>} */}
         </div>
 
-        <div className={styles.inputWrapper}>
-          <div className={styles.label}>Author *</div>
-          <Select
-            placeholder={"Enter author..."}
-            style={{ width: '100%' }}
-            allowClear
-            value={dataCreateOrUpdate.author?._id}
-            onChange={handleChangeAuthors}
-            options={options}
-          // error={errorCreateOrUpdatePost.author?._id}
-          />
-        </div>
 
-        <div className={styles.inputWrapper}>
-          <div className={styles.label}>Category *</div>
-          <Select
-            placeholder={"Enter category..."}
-            mode="multiple"
-            style={{ width: '100%' }}
-            allowClear
-            value={dataCreateOrUpdate.categories}
-            onChange={handleChangeCategorys}
-            // onBlur={() => validateBlur('categories')}
-            options={optionsMultiple}
-          // error={errorCreateOrUpdatePost.categories}
-          />
-        </div>
-
-
-        <div className={styles.inputWrapper}>
-          <div className={styles.label}>Thumbnail</div>
-          <Upload
-            beforeUpload={() => false}
-            onChange={handleAvatarUpload}
-            fileList={avatarFileList}
-          >
-            <Button icon={<UploadOutlined />}>Click to Upload</Button>
-          </Upload>
-        </div>
-
-        <div className={styles.btnWrap}>
-          <ButtonMASQ
-            textBtn={'Save'}
-            loading={isLoadingBtnCreateOrUpdatePost}
-            onClick={() => handleConfirmCreateOrUpdatePost()}
-            disable={false}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          />
-        </div>
       </div>
-    </ModalGeneral>
+    </div>
   );
 }
 
-export default CreateOrUpdate;
+export default CreatePost;

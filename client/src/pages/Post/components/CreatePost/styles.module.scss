@@ -1,0 +1,49 @@
+@import "src/assets/scss/variables";
+.postManagementWrap {
+  background: $colorWhite;
+  // padding: 10px;
+  border-radius: 4px;
+  .mainModalWrap {
+    width: 100%;
+
+    .wrapperAuthorCategory {
+      display: flex;
+      align-items: center;
+    }
+
+    .inputWrapperContent {
+      padding: 10px;
+      width: 100%;
+
+      .label {
+        display: block;
+        font-weight: 500;
+        font-size: 14px;
+        color: $colorBlack;
+        margin-bottom: 6px;
+      }
+    }
+
+    .inputWrapper {
+      padding: 10px;
+      width: 100%;
+      margin-bottom: 18px;
+
+      .label {
+        display: block;
+        font-weight: 500;
+        font-size: 14px;
+        color: $colorBlack;
+        margin-bottom: 6px;
+      }
+
+      .error {
+        display: block;
+        color: $colorError;
+        font-weight: 500;
+      }
+    }
+
+  }
+}
+// postManagementWrap

@@ -21,7 +21,7 @@ watchdog
 		// Editor configuration.
 	} )
 	.catch( handleSampleError );
-
+	
 function handleSampleError( error ) {
 	const issueUrl = 'https://github.com/ckeditor/ckeditor5/issues';
 

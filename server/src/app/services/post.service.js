@@ -109,7 +109,7 @@ export async function filter({ q, page, per_page, field, sort_order, authorId, c
             $limit: per_page, // Giới hạn số lượng bản ghi trả về
         },
         {
-            $sort: { [field]: sort_order === "desc" ? -1 : 1 }, // Sắp xếp kết quả theo trường
+            $sort: { [field]: sort_order === "asc" ? 1 : -1 }, // Sắp xếp kết quả theo trường
         },
     ]);
 
