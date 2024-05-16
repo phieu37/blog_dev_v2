@@ -13,7 +13,7 @@ import { handleCreateAuthor, handleUpdateAuthor } from "../../../../api/author"
 import DatePickerMSQA from "../../../../components/UI/DataPicker"
 import moment from "moment"
 import dayjs from "dayjs"
-import { Button, Input, Upload } from "antd"
+import { Button, Upload } from "antd"
 import { UploadOutlined } from "@ant-design/icons"
 import CustomCKEditor from '../../../../components/Ckeditor5';
 
@@ -148,7 +148,7 @@ function CreateOrUpdate(props) {
         birthday: dataCreateOrUpdate.birthday,
         // status: dataCreateOrUpdate.status,
         certificate: dataCreateOrUpdate.certificate.name,
-        date: dataCreateOrUpdate.certificate.date,
+        date: dataCreateOrUpdate.certificate?.date,
         avatar: dataCreateOrUpdate.avatar,
       }
     }
@@ -227,7 +227,7 @@ function CreateOrUpdate(props) {
         <div className={styles.inputWrapper}>
           <div className={styles.label}>Bio</div>
           <CustomCKEditor
-            placeholder={"Enter bio..."}
+            data={dataCreateOrUpdate.bio || ''}
             onChange={handleCKEditorChange}
             // value={dataCreateOrUpdate.bio}
             error={errorCreateOrUpdateAuthor.bio}

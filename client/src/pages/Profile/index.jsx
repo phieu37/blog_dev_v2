@@ -37,20 +37,19 @@ function Profile() {
             <div className={`${styles.profileItem}`}>
               <div className={styles.informationWrap}>
 
-                {showEditAvatar ? (
-                  <EditAvatar />
-                ) : (
-                  <div className={styles.avatarWrap}>
-                    <div className={styles.btnChangeImage}>
-                      <div className={styles.btnImage}>
-                        <Image className={styles.btnImageIcon} src={authUser.avatar || User} alt="" />
-                      </div>
-                      <div className={styles.btnChangeCamera}>
-                        <CameraOutlined className={styles.btnChangeCameraIcon} onClick={handleCameraClick} />
+                {showEditAvatar ? <EditAvatar /> :
+                  (
+                    <div className={styles.avatarWrap}>
+                      <div className={styles.btnChangeImage}>
+                        <div className={styles.btnImage}>
+                          <Image className={styles.btnImageIcon} src={authUser.avatar || User} alt="" />
+                        </div>
+                        <div className={styles.btnChangeCamera}>
+                          <CameraOutlined className={styles.btnChangeCameraIcon} onClick={handleCameraClick} />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
                 <div className={styles.infoWrap}>
                   <div className={styles.name}>

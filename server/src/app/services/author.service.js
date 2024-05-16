@@ -78,8 +78,8 @@ export async function filter({ q, page, per_page, field, sort_order }) {
                     name: 1,
                     date: 1,
                 },
-                // created_at: 1,
-                // updated_at: 1,
+                created_at: 1,
+                updated_at: 1,
             },
         },
         {
@@ -89,7 +89,7 @@ export async function filter({ q, page, per_page, field, sort_order }) {
             $limit: per_page,
         },
         {
-            $sort: { [field]: sort_order === "desc" ? -1 : 1 },
+            $sort: { [field]: sort_order === "asc" ? 1 : -1 },
         },
     ]);
 

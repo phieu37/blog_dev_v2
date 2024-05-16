@@ -14,7 +14,7 @@ const postSlice = createSlice({
     isLoadingBtnCreateOrUpdatePost: false,
     errorCreateOrUpdatePost: {
       title: "",
-      // content: "",
+      content: "",
       thumbnail: "",
       author_id: null,
       category_ids: []

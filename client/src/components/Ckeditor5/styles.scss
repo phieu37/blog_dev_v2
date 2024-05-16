@@ -11,33 +11,22 @@ p.ck-placeholder {
   margin-top: 12.6px;
 }
 
-.ck-editor__editable_inline {
-  min-height: 200px;
+// .ck .ck-editor__main {
+//   height: 100px;
+// }
+
+.ck-rounded-corners .ck.ck-editor__main > .ck-editor__editable,
+.ck.ck-editor__main > .ck-editor__editable.ck-rounded-corners {
+  height: 600px;
+  transition: none;
+  resize: vertical;
+  overflow-y: auto;
 }
 
-// .ck.fullscreen-mode .ck.ck-editor__main {
-//   height: 100% !important;
-//   resize: none !important;
-//   max-height:100% !important;
-//   overflow: scroll;
-// }
+.ck-editor__editable_inline {
+  min-height: 100px;
+}
 
-// .ck-editor {
-//   height: 100% !important;
-//   display: flex;
-//   flex-direction: column;
-// }
-// .ck-editor .ck-editor__top {
-//   flex-shrink: 1;
-// }
-// .ck-editor .ck-editor__main {
-//   flex-grow: 1;
-//   position: relative;
-// }
-// .ck-editor .ck-editor__main .ck-editor__editable, .ck-editor .ck-editor__main .ck-source-editing-area {
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-// }
+.ck.ck-balloon-panel.ck-balloon-panel_visible {
+  display: none !important;
+}

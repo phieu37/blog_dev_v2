@@ -1,25 +1,12 @@
 import React from 'react';
 import './styles.scss';
-import {Select} from "antd";
+import { Select } from "antd";
 import PropTypes from "prop-types";
 
-SelectCustom.prototype = {
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
-  options: PropTypes.array.isRequired,
-
-}
-
-SelectCustom.defaultProps = {
-  options: [],
-  value: '',
-}
-
-function SelectCustom (props) {
-  let {onChange, value, options} = props
-
+function SelectMASQ({ onChange, value, options }) {
   return (
     <Select
+      placeholder
       className={`select-custom`}
       defaultValue={value}
       onChange={onChange}
@@ -28,4 +15,15 @@ function SelectCustom (props) {
   );
 }
 
-export default SelectCustom
+SelectMASQ.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  options: PropTypes.array.isRequired,
+};
+
+SelectMASQ.defaultProps = {
+  options: [],
+  value: '',
+};
+
+export default SelectMASQ;
