@@ -37,8 +37,8 @@ const appSlice = createSlice({
       ...state,
       location: {
         pathName: action.payload.pathName,
-        payload: action.payload.payload || {},
         prevPathName: action.payload.prevPathName || null,
+        payload: action.payload.payload || {},
       }
     })
   }

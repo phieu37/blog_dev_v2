@@ -15,6 +15,7 @@ import Category from "../pages/Category"
 import Post from "../pages/Post"
 import PostDetail from "../pages/PostDetail"
 import CategoryDetail from "../pages/CategoryDetail"
+import Home from "../pages/Home"
 
 const router = createBrowserRouter([
   {
@@ -32,11 +33,16 @@ const router = createBrowserRouter([
     element: <Profile />,
     loader: ({ request }) => rootLoader({ request }, true, "LOAD_PROFILE_PAGE"),
   },
+  // {
+  //   path: "/",
+  //   // element: <Home />,
+  //   element: <User />,
+  //   loader: ({ request }) => rootLoader({ request }, true, "LOAD_HOME_PAGE"),
+  // },
   {
     path: "/",
-    // element: <Home />,
-    element: <User />,
-    loader: ({ request }) => rootLoader({ request }, true, "LOAD_HOME_PAGE"),
+    element: <Home />,
+    loader: ({ request }) => rootLoader({ request }, false, "LOAD_HOME_PAGE"),
   },
   {
     path: "/about",

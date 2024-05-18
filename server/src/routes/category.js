@@ -41,5 +41,4 @@ router.delete(
     asyncHandler(categoryController.removeItem)
 );
 
-
 export default router;

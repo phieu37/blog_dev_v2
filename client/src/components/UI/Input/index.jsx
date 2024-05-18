@@ -7,7 +7,7 @@ import show from "../../../assets/images/icon/show_password.svg"
 import hide from "../../../assets/images/icon/hide_password.svg"
 
 // kiểm tra tính hợp lệ của các props được truyền vào
-InputMASQ.prototype = {
+InputMASQ.propTypes = {
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   error: PropTypes.string.isRequired,
