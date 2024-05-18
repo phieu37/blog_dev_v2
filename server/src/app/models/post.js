@@ -14,13 +14,17 @@ export const Post = createModel("Post", "posts", {
         type: String,
         default: "",
     },
+    // views: { 
+    //     type: Number,
+    //     default: 0 
+    // },
     author_id: {
         type: ObjectId,
-        // required: true,
+        required: true,
         ref: "Author",
     },
     category_ids: {
         type: [{type: ObjectId, ref: "Category"}],
-        // required: true,
+        required: true,
     },
 });

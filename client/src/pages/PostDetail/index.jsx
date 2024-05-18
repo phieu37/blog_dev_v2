@@ -49,7 +49,7 @@ function Post() {
                     <h3>
                       <div className={styles.authorSpan}>* Tiểu sử: </div>
                       <div className={styles.authorBio}>
-                        {postDetail.author.bio}
+                        {parse(postDetail.author.bio)}
                       </div>
                     </h3>
                   </div>

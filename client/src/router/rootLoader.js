@@ -1,38 +1,39 @@
 // xử lý việc tải dữ liệu và định hướng trang
-import { redirect } from "react-router-dom"
+import { redirect } from "react-router-dom" // điều hướng tới các trang
 import store from "../states/configureStore"
-import { initialSaga } from "../states/modules/routing"
-import { hasPermission } from "../utils/helper"
-import { getMe } from "../api/auth"
-import { getAuthToken } from "../utils/localStorage"
+import { initialSaga } from "../states/modules/routing" // khởi tạo dữ liệu hoặc thực hiện hành động
+import { hasPermission } from "../utils/helper" // kiểm tra quyền truy cập
+import { getMe } from "../api/auth" //  lấy thông tin người dùng hiện tại
+import { getAuthToken } from "../utils/localStorage"  //  lấy token xác thực từ local storage
 
-export const rootLoader = async ({ request }, isAuth, saga = null, permissions = []) => {
+export const rootLoader = async ({ request }, requiredAuth, saga = null, permissions = []) => {
   const url = new URL(request.url)
-
-  if (url.pathname === "/profile") {
-    await store.dispatch(getMe())
-  }
-  
   let { auth } = store.getState()
 
-  if (!auth.isAuthSuccess && getAuthToken()) {
+  const firstCondition = !auth.isAuthSuccess && getAuthToken()
+  const secondCondition = url.pathname === "/profile"
+
+  if (firstCondition || secondCondition) {
     await store.dispatch(getMe())
     auth = store.getState().auth
   }
 
-  if (isAuth) {
-    if (!auth.isAuthSuccess) {
+  if (requiredAuth) {
+    if (auth.isAuthSuccess) {
+      if (permissions.length > 0 && !hasPermission(permissions)) {
+        // người dùng không có quyền -> 403
+        return redirect("/403")
+      }
+    } else {
+      // không được xác thực -> login
       return redirect("/login")
     }
-
-    if (permissions.length > 0 && !hasPermission(permissions)) {
-      return redirect("/403")
-    }
-  } else {
-    if (auth.isAuthSuccess) {
-      return redirect("/")
-    }
+  } else if (auth.isAuthSuccess) {
+    // đã xác thực -> users
+    return redirect("/users")
   }
+
+  
 
   if (saga) {
     store.dispatch(initialSaga(saga))
