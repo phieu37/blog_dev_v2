@@ -27,21 +27,6 @@ export const getListPost = (dataFilter = { perPage: 5, page: 1 }) => async (disp
     path += `&sort_order=${dataFilter.order}&column=${dataFilter.column}`
   }
 
-// export const getListPost = () => async (dispatch, getState) => {
-//   const dataFilter = getState().post.dataFilter
-//   let path = `posts`;
-//   if (dataFilter && dataFilter.perPage && dataFilter.page) {
-//     path += `?per_page=${dataFilter.perPage}&page=${dataFilter.page}`;
-
-//     if (dataFilter.keySearch) {
-//       path += `&q=${dataFilter.keySearch}`;
-//     }
-
-//     if (dataFilter.order && dataFilter.column) {
-//       path += `&sort_order=${dataFilter.order}&field=${dataFilter.column}`;
-//     }
-//   }
-
   return callApi({
     method: "get",
     apiPath: path,

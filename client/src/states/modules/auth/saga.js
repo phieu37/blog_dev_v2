@@ -14,7 +14,7 @@ function* handleActions() {
     getNotification("success", "Register success")
     let token = action.payload.data.access_token;
     setAuthToken(token);
-    yield put(setLocation({ pathName: "/" }))
+    yield put(setLocation({ pathName: "/home" }))
     yield
   })
 
