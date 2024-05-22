@@ -29,11 +29,9 @@ export const rootLoader = async ({ request }, requiredAuth, saga = null, permiss
       return redirect("/login")
     }
   } else if (auth.isAuthSuccess) {
-    // đã xác thực -> users
-    return redirect("/users")
+    // đã xác thực -> home
+    return redirect("/home")
   }
-
-  
 
   if (saga) {
     store.dispatch(initialSaga(saga))

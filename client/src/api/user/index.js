@@ -18,7 +18,7 @@ import {
 } from "../../states/modules/user"
 
 // Tạo các action 
-export const getListUser = (dataFilter = { perPage: 5, page: 1 }) => async (dispatch, getState) => {
+export const getListUser = (dataFilter = { perPage: 5, page: 1}) => async (dispatch, getState) => {
     let path = `users?per_page=${dataFilter.perPage}&page=${dataFilter.page}`
 
     if (dataFilter.keySearch) {

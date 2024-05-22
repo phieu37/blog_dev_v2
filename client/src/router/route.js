@@ -4,7 +4,7 @@ import Login from "../pages/Auth/Login"
 import Register from "../pages/Auth/Register"
 import ForgotPassword from "../pages/Auth/ForgotPassword"
 import Profile from "../pages/Profile"
-// import Home from "../pages/Home"
+import Home from "../pages/Home"
 import About from "../pages/About"
 import Employee from "../pages/Employee"
 // import UserManagement from "../pages/User"
@@ -15,7 +15,7 @@ import Category from "../pages/Category"
 import Post from "../pages/Post"
 import PostDetail from "../pages/PostDetail"
 import CategoryDetail from "../pages/CategoryDetail"
-import Home from "../pages/Home"
+import NoLogin from "../pages/NoLogin"
 
 const router = createBrowserRouter([
   {
@@ -33,16 +33,15 @@ const router = createBrowserRouter([
     element: <Profile />,
     loader: ({ request }) => rootLoader({ request }, true, "LOAD_PROFILE_PAGE"),
   },
-  // {
-  //   path: "/",
-  //   // element: <Home />,
-  //   element: <User />,
-  //   loader: ({ request }) => rootLoader({ request }, true, "LOAD_HOME_PAGE"),
-  // },
   {
     path: "/",
+    element: <NoLogin />,
+    loader: ({ request }) => rootLoader({ request }, false, "LOAD_NOLOGIN_PAGE"),
+  },
+  {
+    path: "/home",
     element: <Home />,
-    loader: ({ request }) => rootLoader({ request }, false, "LOAD_HOME_PAGE"),
+    loader: ({ request }) => rootLoader({ request }, true, "LOAD_HOME_PAGE"),
   },
   {
     path: "/about",
