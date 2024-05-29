@@ -3,6 +3,9 @@ import {
   getList,
   getListSuccess,
   getListFail,
+  getTotal,
+  getTotalSuccess,
+  getTotalFail,
   createCategory,
   createCategorySuccess,
   createCategoryFail,
@@ -45,6 +48,17 @@ export const getListCategory = (dataFilter = { perPage: 5, page: 1 }) => async (
     method: "get",
     apiPath: path,
     actionTypes: [getList, getListSuccess, getListFail],
+    variables: {},
+    dispatch,
+    getState,
+  })
+}
+
+export const getTotalCategories = () => async (dispatch, getState) => {
+  return callApi({
+    method: "get",
+    apiPath: `categories/totalCategories`,
+    actionTypes: [getTotal, getTotalSuccess, getTotalFail],
     variables: {},
     dispatch,
     getState,

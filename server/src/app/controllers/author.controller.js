@@ -1,6 +1,10 @@
 import {responseSuccess} from "@/utils/helpers";
 import * as authorService from "../services/author.service";
 
+export async function readRootTotalAuthors(req, res) {
+    return responseSuccess(res, await authorService.getTotalAuthors(req.query));
+}
+
 export async function readRoot(req, res) {
     return responseSuccess(res, await authorService.filter(req.query));
 }

@@ -11,8 +11,8 @@ export const readRoot = Joi.object({
     status: tryValidateOrDefault(Joi.number().valid(...Object.values(STATUS_ACTIVE)), null),
     page: tryValidateOrDefault(Joi.number().integer().min(1), 1),
     per_page: tryValidateOrDefault(Joi.number().integer().min(1).max(100), 20),
-    field: tryValidateOrDefault(Joi.valid("created_at","name", "eail"), "created_at"),
-    sort_order: tryValidateOrDefault(Joi.valid("asc", "desc"), "asc"),
+    field: tryValidateOrDefault(Joi.valid("created_at","name", "email"), "created_at"),
+    sort_order: tryValidateOrDefault(Joi.valid("asc", "desc"), "desc"),
 }).unknown(true);
 
 export const createItem = Joi.object({

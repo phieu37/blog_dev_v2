@@ -1,6 +1,10 @@
 import {responseSuccess} from "@/utils/helpers";
 import * as categoryService from "../services/category.service";
 
+export async function readRootTotalCategories(req, res) {
+    return responseSuccess(res, await categoryService.getTotalCategories(req.query));
+}
+
 export async function readRoot(req, res) {
     return responseSuccess(res, await categoryService.filter(req.query));
 }

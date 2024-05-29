@@ -5,6 +5,9 @@ const authorSlice = createSlice({
   initialState: {
     authors: [],
     isLoadingTableAuthor: false,
+    totalAuthors:{
+      total: 0
+    },
     paginationListAuthor: {
       page: 1,
       perPage: 10,
@@ -58,6 +61,23 @@ const authorSlice = createSlice({
       authors: [],
       isLoadingTableAuthor: false,
     }),
+
+    getTotal: (state) => ({
+      ...state,
+      isLoadingTableAuthor: true,
+    }),
+    getTotalSuccess: (state, action) => ({
+      ...state,
+      isLoadingTableAuthor: false,
+      totalAuthors: {
+        total: action.payload.data.total,
+      },
+    }),
+    getTotalFail: (state) => ({
+      ...state,
+      isLoadingTableAuthor: false,
+    }),
+
     getAllRole: (state) => ({ ...state }),
     getAllRoleSuccess: (state, action) => ({
       ...state,
@@ -110,6 +130,9 @@ export const {
   getList,
   getListSuccess,
   getListFail,
+  getTotal,
+  getTotalSuccess,
+  getTotalFail,
   getAllRole,
   getAllRoleSuccess,
   getAllRoleFail,

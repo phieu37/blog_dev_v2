@@ -5,6 +5,9 @@ const userSlice = createSlice({
   initialState: {
     users: [],
     isLoadingTableUser: false,
+    totalUsers:{
+      total: 0
+    },
     paginationListUser: {
       currentPage: 1,
       perPage: 5,
@@ -57,6 +60,23 @@ const userSlice = createSlice({
       users: [],
       isLoadingTableUser: false,
     }),
+
+    getTotal: (state) => ({
+      ...state,
+      isLoadingTableUser: true,
+    }),
+    getTotalSuccess: (state, action) => ({
+      ...state,
+      isLoadingTableUser: false,
+      totalUsers: {
+        total: action.payload.data.total,
+      },
+    }),
+    getTotalFail: (state) => ({
+      ...state,
+      isLoadingTableUser: false,
+    }),
+
     getAllRole: (state) => ({ ...state }),
     getAllRoleSuccess: (state, action) => ({
       ...state,
@@ -109,6 +129,9 @@ export const {
   getList,
   getListSuccess,
   getListFail,
+  getTotal,
+  getTotalSuccess,
+  getTotalFail,
   getAllRole,
   getAllRoleSuccess,
   getAllRoleFail,

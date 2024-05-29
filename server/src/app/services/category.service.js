@@ -17,26 +17,31 @@ export async function filter({q, page, per_page, field, sort_order}) {
     q = q ? {$regex: q, $options: "i"} : null;
 
     const filter = {
-        ...(q && {$or: [{name: q}]}),
+        ...(q && {name: q}),
     };
+    
+    const sort = {};
+    sort[field] = sort_order === "desc" ? -1 : 1;
 
+    const skip = (page - 1) * per_page;
+    const limit = per_page;
+
+    // Luôn tạo một đối tượng tách biệt trước khi chèn vào pipeline của aggregate
+    // để tránh các lỗi khi gán giá trị trực tiếp bên trong mệnh đề
     const categories = await Category.aggregate([
-        {
-            $match: filter,
-        },
-        {
-            $skip: (page - 1) * per_page,
-        },
-        {
-            $limit: per_page,
-        },
-        {
-            $sort: {[field]: sort_order === "desc" ? -1 : 1},
-        },
+        { $match: filter },
+        { $sort: sort },
+        { $skip: skip },
+        { $limit: limit },
     ]);
 
     const total = await Category.countDocuments(filter);
     return {total, page, per_page, categories};
+}
+
+export async function getTotalCategories() {
+    const total = await Category.countDocuments({});
+    return { total };
 }
 
 // export async function details(currentCategory) {

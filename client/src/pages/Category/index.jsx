@@ -48,8 +48,8 @@ function Category() {
       dataIndex: 'description',
       key: 'description',
       render: (field) => <span>{field || "Đang cập nhật"}</span>,
-      defaultSortOrder: '',
-      showSorterTooltip: false,
+      // defaultSortOrder: '',
+      // showSorterTooltip: false,
       // sorter: true,
     },
     {

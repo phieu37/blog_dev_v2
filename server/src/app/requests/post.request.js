@@ -9,7 +9,7 @@ export const readRoot = Joi.object({
     page: tryValidateOrDefault(Joi.number().integer().min(1), 1),
     per_page: tryValidateOrDefault(Joi.number().integer().min(1).max(100), 20),
     field: tryValidateOrDefault(Joi.valid("created_at", "title", "category_ids", "author_id"), "created_at"),
-    sort_order: tryValidateOrDefault(Joi.valid("asc", "desc"), "asc"),
+    sort_order: tryValidateOrDefault(Joi.valid("asc", "desc"), "desc"),
     categoryId: tryValidateOrDefault(Joi.string().trim(), ""),
     authorId: tryValidateOrDefault(Joi.string().trim(), ""),
 }).unknown(true);

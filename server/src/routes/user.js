@@ -16,6 +16,11 @@ router.get(
     asyncHandler(userController.readRoot)
 );
 
+router.get(
+    "/totalUsers", 
+    asyncHandler(userController.readRootTotalUsers)
+);
+
 // router.get(
 //     "/:id",
 //     asyncHandler(userMiddleware.checkUserId),

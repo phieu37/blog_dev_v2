@@ -17,6 +17,11 @@ router.get(
 );
 
 router.get(
+    "/totalPosts", 
+    asyncHandler(postController.readRootTotalPosts)
+);
+
+router.get(
     "/:id",
     asyncHandler(postMiddleware.checkPostId),
     asyncHandler(postController.readItem)

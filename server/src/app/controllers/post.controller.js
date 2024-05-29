@@ -1,6 +1,10 @@
 import {responseSuccess} from "@/utils/helpers";
 import * as postService from "../services/post.service";
 
+export async function readRootTotalPosts(req, res) {
+    return responseSuccess(res, await postService.getTotalPosts(req.query));
+}
+
 export async function readRoot(req, res) {
     return responseSuccess(res, await postService.filter(req.query));
 }

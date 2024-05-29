@@ -3,9 +3,12 @@ import {
   getList,
   getListSuccess,
   getListFail,
-  getAllRole,
-  getAllRoleSuccess,
-  getAllRoleFail,
+  getTotal,
+  getTotalSuccess,
+  getTotalFail,
+  // getAllRole,
+  // getAllRoleSuccess,
+  // getAllRoleFail,
   createUser,
   createUserSuccess,
   createUserFail,
@@ -43,16 +46,27 @@ export const getListUser = (dataFilter = { perPage: 5, page: 1}) => async (dispa
     })
   }
 
-export const getAllRoleForUser = () => async (dispatch, getState) => {
+export const getTotalUsers = () => async (dispatch, getState) => {
   return callApi({
     method: "get",
-    apiPath: `users`,
-    actionTypes: [getAllRole, getAllRoleSuccess, getAllRoleFail],
+    apiPath: `users/totalUsers`,
+    actionTypes: [getTotal, getTotalSuccess, getTotalFail],
     variables: {},
     dispatch,
     getState,
   })
 }
+
+// export const getAllRoleForUser = () => async (dispatch, getState) => {
+//   return callApi({
+//     method: "get",
+//     apiPath: `users`,
+//     actionTypes: [getAllRole, getAllRoleSuccess, getAllRoleFail],
+//     variables: {},
+//     dispatch,
+//     getState,
+//   })
+// }
 
 export const handleCreateUser = (data) => async (dispatch, getState) => {
   return callApi({

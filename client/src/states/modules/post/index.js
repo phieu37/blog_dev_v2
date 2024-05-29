@@ -5,6 +5,9 @@ const postSlice = createSlice({
   initialState: {
     posts: [],
     isLoadingTablePost: false,
+    totalPosts:{
+      total: 0
+    },
     paginationListPost: {
       page: 1,
       perPage: 10,
@@ -55,6 +58,23 @@ const postSlice = createSlice({
       posts: [],
       isLoadingTablePost: false,
     }),
+
+    getTotal: (state) => ({
+      ...state,
+      isLoadingTablePost: true,
+    }),
+    getTotalSuccess: (state, action) => ({
+      ...state,
+      isLoadingTablePost: false,
+      totalPosts: {
+        total: action.payload.data.total,
+      },
+    }),
+    getTotalFail: (state) => ({
+      ...state,
+      isLoadingTablePost: false,
+    }),
+
     getAllRole: (state) => ({ ...state }),
     getAllRoleSuccess: (state, action) => ({
       ...state,
@@ -107,6 +127,9 @@ export const {
   getList,
   getListSuccess,
   getListFail,
+  getTotal,
+  getTotalSuccess,
+  getTotalFail,
   getAllRole,
   getAllRoleSuccess,
   getAllRoleFail,
