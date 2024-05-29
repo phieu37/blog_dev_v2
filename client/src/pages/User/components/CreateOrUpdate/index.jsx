@@ -16,13 +16,6 @@ import { handleCreateUser, handleUpdateUser } from "../../../../api/user";
 import { Button, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
-// CreateOrUpdate.prototype = {
-//   isModalOpen: PropTypes.bool.isRequired,
-//   configModal: PropTypes.object.isRequired,
-//   onClose: PropTypes.func,
-//   onConfirm: PropTypes.func,
-// }
-
 CreateOrUpdate.defaultProps = {
   isModalOpen: false,
   textBtnConfirm: 'OK',
@@ -230,18 +223,6 @@ function CreateOrUpdate(props) {
               />
             </div> : ''
         }
-
-        {/* <div className={styles.inputWrapper}>
-          <div className={styles.label}>Avatar</div>
-          <Upload
-            beforeUpload={() => false}
-            onChange={handleAvatarUpload}
-            fileList={avatarFileList}
-          >
-            <Button icon={<UploadOutlined />}>Click to Upload</Button>
-          </Upload>
-          {errorCreateOrUpdateUser.avatar && <span className={styles.error}>{errorCreateOrUpdateUser.avatar}</span>}
-        </div> */}
 
         <div className={styles.inputWrapper}>
           <div className={styles.label}>Avatar</div>

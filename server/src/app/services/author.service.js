@@ -38,6 +38,12 @@ export async function filter({ q, page, per_page, field, sort_order }) {
     const filter = {
         ...(q && { $or: [{ name: q }, { email: q }] }),
     };
+    
+    const sort = {};
+    sort[field] = sort_order === "desc" ? -1 : 1;
+
+    const skip = (page - 1) * per_page;
+    const limit = per_page;
 
     const authors = await Author.aggregate([
         {
@@ -82,19 +88,18 @@ export async function filter({ q, page, per_page, field, sort_order }) {
                 updated_at: 1,
             },
         },
-        {
-            $skip: (page - 1) * per_page,
-        },
-        {
-            $limit: per_page,
-        },
-        {
-            $sort: { [field]: sort_order === "asc" ? 1 : -1 },
-        },
+        { $sort: sort },
+        { $skip: skip },
+        { $limit: limit },
     ]);
 
     const total = await Author.countDocuments(filter);
     return { total, page, per_page, authors };
+}
+
+export async function getTotalAuthors() {
+    const total = await Author.countDocuments({});
+    return { total };
 }
 
 export async function details(currentAuthor) {

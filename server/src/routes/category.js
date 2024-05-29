@@ -17,6 +17,11 @@ router.get(
 );
 
 router.get(
+    "/totalCategories", 
+    asyncHandler(categoryController.readRootTotalCategories)
+);
+
+router.get(
     "/:id",
     asyncHandler(categoryMiddleware.checkCategoryId),
     asyncHandler(categoryController.readItem)

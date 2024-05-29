@@ -37,6 +37,12 @@ export async function filter({ q, page, per_page, field, sort_order, authorId, c
         }),
     };
 
+    const sort = {};
+    sort[field] = sort_order === "desc" ? -1 : 1;
+
+    const skip = (page - 1) * per_page;
+    const limit = per_page;
+
     const posts = await Post.aggregate([
         {
             $match: filter,
@@ -102,19 +108,18 @@ export async function filter({ q, page, per_page, field, sort_order, authorId, c
                 updated_at: 1,
             },
         },
-        {
-            $skip: (page - 1) * per_page, // số lượng bản ghi cần bỏ qua
-        },
-        {
-            $limit: per_page, // Giới hạn số lượng bản ghi trả về
-        },
-        {
-            $sort: { [field]: sort_order === "asc" ? 1 : -1 }, // Sắp xếp kết quả theo trường
-        },
+        { $sort: sort },
+        { $skip: skip },
+        { $limit: limit },
     ]);
 
     const total = await Post.countDocuments(filter);
     return { total, page, per_page, posts };
+}
+
+export async function getTotalPosts() {
+    const total = await Post.countDocuments({});
+    return { total };
 }
 
 export async function details(currentPost) {

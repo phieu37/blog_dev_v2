@@ -39,16 +39,6 @@ export async function register({name, email, password, phone, avatar}) {
         avatar = avatar.save();
     }
 
-    // avatar = avatar ? avatar.save() : DEFAULT_AVATAR_PATH + avatar;
-
-    // if (avatar && !Array.isArray(avatar)) {
-    //     avatar = [await avatar.save()];
-    // } else if (avatar) {
-    //     avatar = await Promise.all(avatar.map((a) => a.save()));
-    // } else {
-    //     avatar = [DEFAULT_AVATAR_PATH];
-    // }
-
     const user = new User({
         name,
         email,
@@ -72,12 +62,6 @@ export async function profile(user_id) {
     if (user.avatar) {
         user.avatar = LINK_STATIC_URL + user.avatar;
     }
-
-    // if (user.avatar && Array.isArray(user.avatar)) {
-    //     user.avatar = user.avatar.map((avatar) => LINK_STATIC_URL + avatar);
-    // } else {
-    //     user.avatar = LINK_STATIC_URL + user.avatar;
-    // }
 
     return user;
 }

@@ -5,6 +5,9 @@ const categorySlice = createSlice({
   initialState: {
     categories: [],
     isLoadingTableCategory: false,
+    totalCategories:{
+      total: 0
+    },
     paginationListCategory: {
       page: 1,
       perPage: 10,
@@ -52,6 +55,23 @@ const categorySlice = createSlice({
       categories: [],
       isLoadingTableCategory: false,
     }),
+
+    getTotal: (state) => ({
+      ...state,
+      isLoadingTableCategory: true,
+    }),
+    getTotalSuccess: (state, action) => ({
+      ...state,
+      isLoadingTableCategory: false,
+      totalCategories: {
+        total: action.payload.data.total,
+      },
+    }),
+    getTotalFail: (state) => ({
+      ...state,
+      isLoadingTableCategory: false,
+    }),
+
     getAllRole: (state) => ({ ...state }),
     getAllRoleSuccess: (state, action) => ({
       ...state,
@@ -104,6 +124,9 @@ export const {
   getList,
   getListSuccess,
   getListFail,
+  getTotal,
+  getTotalSuccess,
+  getTotalFail,
   getAllRole,
   getAllRoleSuccess,
   getAllRoleFail,

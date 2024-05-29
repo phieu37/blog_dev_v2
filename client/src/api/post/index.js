@@ -3,6 +3,9 @@ import {
   getList,
   getListSuccess,
   getListFail,
+  getTotal,
+  getTotalSuccess,
+  getTotalFail,
   createPost,
   createPostSuccess,
   createPostFail,
@@ -31,6 +34,17 @@ export const getListPost = (dataFilter = { perPage: 5, page: 1 }) => async (disp
     method: "get",
     apiPath: path,
     actionTypes: [getList, getListSuccess, getListFail],
+    variables: {},
+    dispatch,
+    getState,
+  })
+}
+
+export const getTotalPosts = () => async (dispatch, getState) => {
+  return callApi({
+    method: "get",
+    apiPath: `posts/totalPosts`,
+    actionTypes: [getTotal, getTotalSuccess, getTotalFail],
     variables: {},
     dispatch,
     getState,

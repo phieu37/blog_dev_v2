@@ -42,6 +42,10 @@ export async function filter({ q, page, per_page, field, sort_order }) {
     return { total, page, per_page, users };
 }
 
+export async function getTotalUsers() {
+    const total = await User.countDocuments({});
+    return { total };
+}
 
 export async function details(userId) {
     const user = await User.findById(userId, { password: 0 });

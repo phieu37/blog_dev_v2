@@ -1,6 +1,10 @@
 import {responseError, responseSuccess} from "@/utils/helpers";
 import * as userService from "../services/user.service";
 
+export async function readRootTotalUsers(req, res) {
+    return responseSuccess(res, await userService.getTotalUsers(req.query));
+}
+
 export async function readRoot(req, res) {
     return responseSuccess(res, await userService.filter(req.query));
 }

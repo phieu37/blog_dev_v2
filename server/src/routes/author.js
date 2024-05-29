@@ -17,6 +17,11 @@ router.get(
 );
 
 router.get(
+    "/totalAuthors", 
+    asyncHandler(authorController.readRootTotalAuthors)
+);
+
+router.get(
     "/:id",
     asyncHandler(authorMiddleware.checkAuthorId),
     asyncHandler(authorController.readItem)

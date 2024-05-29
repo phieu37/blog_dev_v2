@@ -3,6 +3,9 @@ import {
   getList,
   getListSuccess,
   getListFail,
+  getTotal,
+  getTotalSuccess,
+  getTotalFail,
   createAuthor,
   createAuthorSuccess,
   createAuthorFail,
@@ -44,6 +47,17 @@ export const getListAuthor = (dataFilter = { perPage: 5, page: 1 }) => async (di
     method: "get",
     apiPath: path,
     actionTypes: [getList, getListSuccess, getListFail],
+    variables: {},
+    dispatch,
+    getState,
+  })
+}
+
+export const getTotalAuthors = () => async (dispatch, getState) => {
+  return callApi({
+    method: "get",
+    apiPath: `authors/totalAuthors`,
+    actionTypes: [getTotal, getTotalSuccess, getTotalFail],
     variables: {},
     dispatch,
     getState,
