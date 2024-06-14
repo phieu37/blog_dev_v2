@@ -18,7 +18,7 @@
         "import/resolver": {
             "alias": {
                 "map": [["@", "./src"]],
-                "extensions": [".js"]
+                "extensions": [".ts", ".js", ".jsx", ".json"]
             }
         }
     },
@@ -36,6 +36,7 @@
         "require-atomic-updates": ["error", {"allowProperties": true}],
         "no-invalid-this": "error",
         "no-undef-init": "error",
-        "no-undefined": "error"
+        "no-undefined": "error",
+        "import/no-unresolved": "off"
     }
 }

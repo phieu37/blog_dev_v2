@@ -1,8 +1,9 @@
 import React from "react"
+import {PERMISSIONS} from "../utils/constains.js";
 
 export const routeMap = [
   {
-    label: "Home",
+    label: "Thống kê",
     icon: (
       <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 16" width="18" height="16">
         <g fill="currentColor">
@@ -15,7 +16,7 @@ export const routeMap = [
     // permissions: ["home_page"],
   },
   {
-    label: "User Management",
+    label: "Quản lý tài khoản",
     icon: (
       <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 16" width="20" height="18">
         <g fill="currentColor">
@@ -23,11 +24,12 @@ export const routeMap = [
         </g>
       </svg>
     ),
-    path: "/users",
-    routeActive: ["/users"],
+    path: "/account-management",
+    routeActive: ["/account-management"],
+    permissions: [PERMISSIONS.SUPER_ADMIN],
   },
   {
-    label: "Author",
+    label: "Quản lý tác giả ",
     icon: (
       <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="28" height="20" >
         <g fill="currentColor">
@@ -39,7 +41,7 @@ export const routeMap = [
     routeActive: ["/authors"],
   },
   {
-    label: "Category",
+    label: "Quản lý danh mục",
     icon: (
       <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20" width="28" height="20">
         <g fill="currentColor">
@@ -51,7 +53,7 @@ export const routeMap = [
     routeActive: ["/categories"],
   },
   {
-    label: "Post",
+    label: "Quản lý bài viết",
     icon: (
       <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90" width="22" height="24">
         <g fill="currentColor">

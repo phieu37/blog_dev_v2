@@ -2,14 +2,6 @@ import React from 'react';
 import styles from './styles.module.scss';
 import './styles.scss';
 import {Modal} from 'antd';
-import PropTypes from "prop-types";
-
-ModalGeneral.prototype = {
-  isModalOpen: PropTypes.bool.isRequired,
-  configModal: PropTypes.object.isRequired,
-  onClose: PropTypes.func,
-  onConfirm: PropTypes.func,
-}
 
 ModalGeneral.defaultProps = {
   isModalOpen: false,

@@ -2,20 +2,7 @@ import React from 'react';
 import styles from './styles.module.scss';
 import './styles.scss';
 import {Modal} from 'antd';
-import PropTypes from "prop-types";
 import ButtonMASQ from "../../Button";
-
-ModalConfirm.prototype = {
-  isModalOpen: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  onClose: PropTypes.func,
-  onConfirm: PropTypes.func,
-  textBtnConfirm: PropTypes.string.isRequired,
-  textBtnCancel: PropTypes.string.isRequired,
-  loadingBtnConfirm: PropTypes.bool.isRequired,
-  type: PropTypes.string.isRequired
-}
 
 ModalConfirm.defaultProps = {
   isModalOpen: false,

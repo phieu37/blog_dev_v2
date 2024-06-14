@@ -10,6 +10,7 @@ import categoryReducer from "./modules/category"
 import categoryDetailReducer from "./modules/category-detail"
 import postReducer from "./modules/post"
 import postDetailReducer from "./modules/post-detail"
+import noLoginReducer from "./modules/no-login"
 
 const rootReducer = {
   app: appReducer,
@@ -24,6 +25,7 @@ const rootReducer = {
   post: postReducer,
   postDetail: postDetailReducer,
   categoryDetail: categoryDetailReducer,
+  noLogin: noLoginReducer,
 }
 
 export default rootReducer

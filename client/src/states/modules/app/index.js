@@ -11,6 +11,10 @@ const appSlice = createSlice({
       payload: {},
       prevPathName: ''
     },
+    goToPage: {
+      path: "",
+      redirected: true
+    },
   },
   reducers: {
     startRequest: (state) => ({
@@ -40,11 +44,39 @@ const appSlice = createSlice({
         prevPathName: action.payload.prevPathName || null,
         payload: action.payload.payload || {},
       }
+    }),
+    goToPage: (state, action) => {
+      console.log('🚀 ~ state, action:', state, action)
+      return (
+        {
+          ...state,
+          goToPage: {
+            path: action.payload.path,
+            redirected: false
+          }
+        }
+      )
+    },
+    // goToPage: (state, action) => ({
+    //   ...state,
+    //   goToPage: {
+    //     path: action.payload.path,
+    //     redirected: false
+    //   }
+    // }),
+    goToPageSuccess: (state) => ({
+      ...state,
+      goToPage: {
+        ...state.goToPage,
+        redirected: true
+      }
     })
   }
 })
 
 export const {
+  goToPage,
+  goToPageSuccess,
   handleSetIsShowSideBar,
   setTitlePage,
   setLocation,

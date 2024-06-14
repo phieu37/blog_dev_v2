@@ -8,7 +8,7 @@ import Logo from '../../../assets/images/logo/logo_blog.png';
 import IconLogo from '../../../assets/images/logo/h2o.png';
 import NavItem from "./components/NavItem";
 import {routeMap} from "../../../router/routeMap";
-import {handleCheckRoute} from "../../../utils/helper";
+import {handleCheckRoute, hasPermission} from "../../../utils/helper";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {handleSetIsShowSideBar} from "../../../states/modules/app";
@@ -83,21 +83,23 @@ function SideBar(props) {
         <ul className={`${styles.menuNav}`}>
           {
             routeMap.map((route, index) => {
-              return (
-                <li
-                  onMouseEnter={(e) => handleHoverMenuNavItem(e, route)}
-                  onClick={() => handleToggleMenu(index, route)}
-                  key={route.path}
-                  className={`
-                    ${styles.menuNavItem}
-                    ${handleCheckRoute(route.routeActive, location.pathname) ? styles.menuNavItemActive : ''}
-                  `}>
-                  <NavItem
-                    route={route}
-                    isShowMenu={index === indexNavItemSelect}
-                  />
-                </li>
-              )
+              if (!route.permissions || hasPermission(route.permissions) || route.permissions?.length === 0) {
+                return (
+                  <li
+                    onMouseEnter={(e) => handleHoverMenuNavItem(e, route)}
+                    onClick={() => handleToggleMenu(index, route)}
+                    key={route.path}
+                    className={`
+                      ${styles.menuNavItem}
+                      ${handleCheckRoute(route.routeActive, location.pathname) ? styles.menuNavItemActive : ''}
+                    `}>
+                    <NavItem
+                      route={route}
+                      isShowMenu={index === indexNavItemSelect}
+                    />
+                  </li>
+                )
+              }
             })
           }
         </ul>

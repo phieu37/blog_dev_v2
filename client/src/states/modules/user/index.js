@@ -4,6 +4,7 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     users: [],
+    idUser: '',
     isLoadingTableUser: false,
     totalUsers:{
       total: 0
@@ -21,13 +22,20 @@ const userSlice = createSlice({
       email: "",
       phone: "",
       password: "",
-      avatar: "",
+      // avatar: "",
       confirmPassword: "",
+      status:"",
     },
     visibleModalDeleteUser: false,
     isLoadingBtnDeleteUser: false,
+    visibleModalResetPassword: false,
+    visibleModalChangeStatus: false,
   },
   reducers: {
+    setIdUser: (state, action) => ({
+      ...state,
+      idUser: action.payload
+    }),
     setErrorCreateOrUpdateUser: (state, action) => ({
       ...state,
       errorCreateOrUpdateUser: action.payload,
@@ -48,7 +56,7 @@ const userSlice = createSlice({
     getListSuccess: (state, action) => ({
       ...state,
       isLoadingTableUser: false,
-      users: action.payload.data.users,
+      users: action.payload.data.admins,
       paginationListUser: {
         currentPage: action.payload.data.page,
         perPage: action.payload.data.per_page,
@@ -119,10 +127,46 @@ const userSlice = createSlice({
       ...state,
       isLoadingBtnDeleteUser: false,
     }),
+
+    setVisibleModalChangePassword: (state, action) => ({
+      ...state,
+      visibleModalResetPassword: action.payload,
+    }),
+    startRequestResetPassword: state => ({
+      ...state,
+      isLoadingBtnResetPassword: true
+    }),
+    requestResetPasswordSuccess: (state) => ({
+      ...state,
+      isLoadingBtnResetPassword: false,
+      visibleModalResetPassword: false
+    }),
+    requestResetPasswordFail: (state) => ({
+      ...state,
+      isLoadingBtnResetPassword: false
+    }),
+
+    setVisibleModalChangeStatus: (state, action) => ({
+      ...state,
+      visibleModalChangeStatus: action.payload
+    }),
+    startRequestChangeStatus: state => ({
+      ...state,
+      isLoadingBtnChangeStatus: true
+    }),
+    requestChangeStatusSuccess: (state) => ({
+      ...state,
+      isLoadingBtnChangeStatus: false,
+    }),
+    requestChangeStatusFail: (state) => ({
+      ...state,
+      isLoadingBtnChangeStatus: false
+    }),
   },
 })
 
 export const {
+  setIdUser,
   setErrorCreateOrUpdateUser,
   setVisibleModalDeleteUser,
   setVisibleModalCreateOrUpdateUser,
@@ -144,6 +188,14 @@ export const {
   deleteUser,
   deleteUserSuccess,
   deleteUserFail,
+  setVisibleModalChangePassword,
+  startRequestResetPassword,
+  requestResetPasswordSuccess,
+  requestResetPasswordFail,
+  startRequestChangeStatus,
+  requestChangeStatusSuccess,
+  requestChangeStatusFail,
+  setVisibleModalChangeStatus,
 } = userSlice.actions
 
 export default userSlice.reducer

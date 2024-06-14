@@ -14,9 +14,12 @@ import {
 export const handleUpdateInfoUser = (data) => async (dispatch, getState) => {
   return callApi({
     method: "put",
-    apiPath: `auth/me`,
+    apiPath: `admin/auth/me`,
     actionTypes: [updateInfoUser, updateInfoUserSuccess, updateInfoUserFail],
-    variables: data,
+    variables: {
+      name: data.name,
+      phone: data.phone ? data.phone : ''
+    },
     dispatch,
     getState,
   })
@@ -24,8 +27,8 @@ export const handleUpdateInfoUser = (data) => async (dispatch, getState) => {
 
 export const updateAvatarProfile = (data) => async (dispatch, getState) => {
   return callApi({
-    method: 'post',
-    apiPath: `auth/me/avatar`,
+    method: 'put',
+    apiPath: `admin/auth/me/avatar`,
     actionTypes: [changeAvatar, changeAvatarSuccess, changeAvatarFail],
     variables: data,
     dispatch,
@@ -36,15 +39,15 @@ export const updateAvatarProfile = (data) => async (dispatch, getState) => {
 export const handleChangePassword = (data) => async (dispatch, getState) => {
   return callApi({
     method: "patch",
-    apiPath: `auth/change-password`,
+    apiPath: `admin/auth/change-password`,
     actionTypes: [changePassword, changePasswordSuccess, changePasswordFail],
-    variables: data,
+    // variables: data,
     // không dùng form data viết rõ biến cần truyền
-    // variables: {
-    //   password: data.currentPassword,
-    //   new_password: data.newPassword,
-    //   password_confirmation: data.confirmPassword,
-    // },
+    variables: {
+      password: data.currentPassword,
+      new_password: data.newPassword,
+      password_confirmation: data.confirmPassword,
+    },
     dispatch,
     getState,
   })

@@ -71,11 +71,16 @@ const authSlice = createSlice({
       ...state,
       isLoadingBtnRegister: false,
     }),
+    setAuthSuccess: (state, action) => ({
+      ...state,
+      isAuthSuccess: action.payload
+    }),
   },
 })
 
 // Xuất actions của slice để sử dụng trong việc dispatch các hành động từ các thành phần khác
 export const {
+  setAuthSuccess,
   setErrorAuth,
   startRequestLogin,
   startRequestLoginSuccess,

@@ -81,7 +81,8 @@ function EditProfile() {
     let validate = handleCheckValidateConfirm(dataValidate, errorInfoUser);
     dispatch(setErrorInfoUser(validate.dataError));
     if (!validate.isError) {
-      dispatch(handleUpdateInfoUser(data))
+      // dispatch(handleUpdateInfoUser(data))
+      dispatch(handleUpdateInfoUser(dataValidate))
     }
   }
 
@@ -96,10 +97,9 @@ function EditProfile() {
     let validate = handleCheckValidateConfirm(dataValidate, errorChangePassword);
     dispatch(setErrorChangePassword(validate.dataError));
     // console.log('du lieu dataChangePassword', dataChangePassword);
-    // console.log('du lieu data', data);
     if (!validate.isError) {
-      dispatch(handleChangePassword(data))
-      // dispatch(handleChangePassword(dataValidate))
+      // dispatch(handleChangePassword(data))
+      dispatch(handleChangePassword(dataValidate))
     }
   }
 

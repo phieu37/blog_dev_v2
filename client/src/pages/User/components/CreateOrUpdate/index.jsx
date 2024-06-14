@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./styles.module.scss";
+import './styles.scss';
 import InputMASQ from "../../../../components/UI/Input";
 import ButtonMASQ from "../../../../components/UI/Button";
 import _ from "lodash";
@@ -13,8 +14,10 @@ import {
   setVisibleModalCreateOrUpdateUser
 } from "../../../../states/modules/user";
 import { handleCreateUser, handleUpdateUser } from "../../../../api/user";
-import { Button, Upload } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Switch } from 'antd';
+import { STATUS_USER } from '../../../../utils/constains';
+// import { Button, Upload } from 'antd';
+// import { UploadOutlined } from '@ant-design/icons';
 
 CreateOrUpdate.defaultProps = {
   isModalOpen: false,
@@ -31,9 +34,11 @@ function CreateOrUpdate(props) {
     name: '',
     email: '',
     phone: '',
-    password: '',
-    confirmPassword: '',
-    avatar: ''
+    // password: '',
+    // confirmPassword: '',
+    // avatar: '',
+    status: STATUS_USER['ACTIVE']
+    // status: ''
   })
   const visibleModalCreateOrUpdateUser = useSelector(state => state.user.visibleModalCreateOrUpdateUser);
   const isLoadingBtnCreateOrUpdateUser = useSelector(state => state.user.isLoadingBtnCreateOrUpdateUser);
@@ -49,9 +54,11 @@ function CreateOrUpdate(props) {
       name: '',
       email: '',
       phone: '',
-      password: '',
-      confirmPassword: '',
-      avatar: ''
+      // password: '',
+      // confirmPassword: '',
+      status: STATUS_USER['ACTIVE']
+      // status: ''
+      // avatar: ''
     }));
   }, [dataCreateOrUpdate, dispatch])
 
@@ -60,7 +67,8 @@ function CreateOrUpdate(props) {
       name: user.name,
       email: user.email,
       phone: user.phone,
-      avatar: user?.avatar,
+      // avatar: user?.avatar,
+      status: user.status,
     })
   }, [user])
 
@@ -69,9 +77,11 @@ function CreateOrUpdate(props) {
       name: '',
       email: '',
       phone: '',
-      password: '',
-      confirmPassword: '',
-      avatar: ''
+      // password: '',
+      // confirmPassword: '',
+      // avatar: ''
+      status: STATUS_USER['ACTIVE']
+      // status: ''
     })
   }
 
@@ -90,23 +100,19 @@ function CreateOrUpdate(props) {
 
   const handleConfirmCreateOrUpdateUser = () => {
     let dataValidate = dataCreateOrUpdate;
+    console.log('🚀 ~ handleConfirmCreateOrUpdateUser ~ dataValidate:', dataValidate)
     let data = new FormData();
     data.append(`name`, dataCreateOrUpdate.name);
     data.append(`email`, dataCreateOrUpdate.email);
     data.append(`phone`, dataCreateOrUpdate.phone);
-
-    // Thêm avatar vào FormData nếu avatarFileList không rỗng
-    if (avatarFileList.length > 0) {
-      const avatarFile = avatarFileList[0]; // Chỉ lấy tệp tin đầu tiên nếu có nhiều tệp tin
-      data.append(`avatar`, avatarFile.originFileObj);
-    }
+    data.append(`status`, dataCreateOrUpdate.status);
 
     if (configModal.type !== "CREATE") {
       dataValidate = {
         name: dataCreateOrUpdate.name,
         email: dataCreateOrUpdate.email,
         phone: dataCreateOrUpdate.phone,
-        avatar: dataCreateOrUpdate?.avatar,
+        status: dataCreateOrUpdate.status,
       }
     } else {
       data.append(`password`, dataCreateOrUpdate.password);
@@ -116,40 +122,21 @@ function CreateOrUpdate(props) {
     dispatch(setErrorCreateOrUpdateUser(validate.dataError));
     if (!validate.isError) {
       if (configModal.type === "CREATE") {
-        dispatch(handleCreateUser(data))
+        // dispatch(handleCreateUser(data))
+        dispatch(handleCreateUser(dataValidate))
       } else {
-        dispatch(handleUpdateUser(data, user._id))
+        // dispatch(handleUpdateUser(data, user._id))
+        dispatch(handleUpdateUser(dataValidate, user._id))
       }
     }
   }
 
-  const [avatarFileList, setAvatarFileList] = useState([]);
-
-  const handleAvatarUpload = (info) => {
-    let fileList = [...info.fileList];
-    fileList = fileList.slice(-1); // Giới hạn chỉ chọn một tệp tin
-
-    // Xử lý khi tệp tin đã được chọn
-    fileList = fileList.map((file) => {
-      if (file.response) {
-        file.url = file.response.url; // Lưu trữ URL của tệp tin tải lên
-      }
-      return file;
-    });
-    setAvatarFileList(fileList);
-
-    // Chuyển đổi tệp tin thành dạng Blob hoặc File và lưu vào state
-    const avatarFile = fileList[0]; // Lấy tệp tin đầu tiên nếu có
-    if (avatarFile) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const blob = new Blob([reader.result], { type: avatarFile.type });
-        avatarFile.originFileObj = new File([blob], avatarFile.name, { type: avatarFile.type });
-        setAvatarFileList([avatarFile]); // Cập nhật avatarFileList với tệp tin đã được chuyển đổi
-      };
-      reader.readAsArrayBuffer(avatarFile.originFileObj);
-    }
-  };
+  const handleChangeSwitch = (isChecked, type) => {
+    // handleReloadError();
+    let data = _.cloneDeep(dataCreateOrUpdate);
+    data[type] = isChecked ? STATUS_USER['ACTIVE'] : STATUS_USER['INACTIVE']
+    setDataCreateOrUpdate(data)
+  }
 
   return (
     <ModalGeneral
@@ -225,6 +212,14 @@ function CreateOrUpdate(props) {
         }
 
         <div className={styles.inputWrapper}>
+          <div className={styles.label}>Status *</div>
+          <Switch
+            checked={dataCreateOrUpdate.status}
+            onChange={(e) => handleChangeSwitch(e, 'status')}
+          />
+        </div>
+
+        {/* <div className={styles.inputWrapper}>
           <div className={styles.label}>Avatar</div>
           <Upload
             beforeUpload={() => false}
@@ -234,7 +229,7 @@ function CreateOrUpdate(props) {
             <Button icon={<UploadOutlined />}>Click to Upload</Button>
           </Upload>
           {errorCreateOrUpdateUser.avatar && <span className={styles.error}>{errorCreateOrUpdateUser.avatar}</span>}
-        </div>
+        </div> */}
 
         <div className={styles.btnWrap}>
           <ButtonMASQ

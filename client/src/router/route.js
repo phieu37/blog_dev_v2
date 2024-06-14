@@ -21,79 +21,109 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
-    loader: ({ request }) => rootLoader({ request }, false, "LOAD_AUTH_PAGE"),
+    loader: ({ request, params }) => rootLoader(
+      { request, params }, false, "LOAD_AUTH_PAGE"
+    ),
   },
   {
     path: "/forgot-password",
     element: <ForgotPassword />,
-    loader: ({ request }) => rootLoader({ request }, false, "LOAD_AUTH_PAGE"),
+    loader: ({ request, params }) => rootLoader(
+      { request, params }, false, "LOAD_AUTH_PAGE"
+    ),
   },
   {
     path: "/profile",
     element: <Profile />,
-    loader: ({ request }) => rootLoader({ request }, true, "LOAD_PROFILE_PAGE"),
+    loader: ({ request, params }) => rootLoader(
+      { request, params }, true, "LOAD_PROFILE_PAGE"
+    ),
   },
   {
     path: "/",
     element: <NoLogin />,
-    loader: ({ request }) => rootLoader({ request }, false, "LOAD_NOLOGIN_PAGE"),
+    loader: ({ request, params }) => rootLoader(
+      { request, params }, true, "LOAD_NOLOGIN_PAGE"
+    ),
   },
   {
     path: "/home",
     element: <Home />,
-    loader: ({ request }) => rootLoader({ request }, true, "LOAD_HOME_PAGE"),
+    loader: ({ request, params }) => rootLoader(
+      { request, params }, true, "LOAD_HOME_PAGE"
+    ),
   },
   {
     path: "/about",
     element: <About />,
-    loader: ({ request }) => rootLoader({ request }, true, "LOAD_ABOUT_PAGE"),
+    loader: ({ request, params }) => rootLoader(
+      { request, params }, true, "LOAD_ABOUT_PAGE"
+    ),
     children: [
       {
         path: ":id",
         element: <About />,
-        loader: ({ request }) => rootLoader({ request }, true, "LOAD_ABOUT_PAGE"),
+        loader: ({ request, params }) => rootLoader(
+          { request, params }, true, "LOAD_ABOUT_PAGE"
+        ),
       },
     ],
   },
   {
     path: "/employee",
     element: <Employee />,
-    loader: ({ request }) => rootLoader({ request }, true, "LOAD_EMPLOYEE_PAGE"),
+    loader: ({ request, params }) => rootLoader(
+      { request, params }, true, "LOAD_EMPLOYEE_PAGE"
+    ),
   },
   {
-    path: "/users",
+    path: "/account-management",
     element: <User />,
-    loader: ({ request }) => rootLoader({ request }, true, "LOAD_USER_PAGE"),
+    loader: ({ request, params }) => rootLoader(
+      { request, params }, true, "LOAD_USER_PAGE"
+    ),
   },
   {
     path: "/register",
     element: <Register />,
-    loader: ({ request }) => rootLoader({ request }, false, "LOAD_AUTH_PAGE"),
+    loader: ({ request, params }) => rootLoader(
+      { request, params }, false, "LOAD_AUTH_PAGE"
+    ),
   },
   {
     path: "/authors",
     element: <Author />,
-    loader: ({ request }) => rootLoader({ request }, true, "LOAD_AUTHOR_PAGE"),
+    loader: ({ request, params }) => rootLoader(
+      { request, params }, true, "LOAD_AUTHOR_PAGE"
+    ),
   },
   {
     path: "/categories",
     element: <Category />,
-    loader: ({ request }) => rootLoader({ request }, true, "LOAD_CATEGORY_PAGE"),
+    loader: ({ request, params }) => rootLoader(
+      { request, params }, true, "LOAD_CATEGORY_PAGE"
+    ),
   },
   {
     path: "/categories/:categoryId",
     element: <CategoryDetail />,
-    loader: ({ request }) => rootLoader({ request }, true, "LOAD_CATEGORY_DETAIL_PAGE"),
+    loader: ({ request, params }) => rootLoader(
+      { request, params }, true, "LOAD_CATEGORY_DETAIL_PAGE"
+    ),
   },
   {
     path: "/posts",
     element: <Post />,
-    loader: ({ request }) => rootLoader({ request }, true, "LOAD_POST_PAGE"),
+    loader: ({ request, params }) => rootLoader(
+      { request, params }, true, "LOAD_POST_PAGE"
+    ),
   },
   {
     path: "/posts/:postId",
     element: <PostDetail />,
-    loader: ({ request }) => rootLoader({ request }, true, "LOAD_POST_DETAIL_PAGE"),
+    loader: ({ request, params }) => rootLoader(
+      { request, params }, true, "LOAD_POST_DETAIL_PAGE"
+    ),
   },
 ])
 

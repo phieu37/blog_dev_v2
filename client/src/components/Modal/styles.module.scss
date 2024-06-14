@@ -1,7 +1,13 @@
 @import "../../assets/scss/variables";
 
+// .headerWrap {
+//   @apply p-6 border-b border-gray-95 text-xl font-semibold
+// }
+
 .headerWrap {
-  @apply p-6 border-b border-gray-95 text-xl font-semibold
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .mainWrap {

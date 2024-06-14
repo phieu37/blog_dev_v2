@@ -1,8 +1,8 @@
 import { all, fork, takeLatest, put } from "redux-saga/effects"
 import { startRequestLoginFail, startRequestLoginSuccess, startRequestRegisterFail, startRequestRegisterSuccess } from "./index"
 import { setAuthToken } from "../../../utils/localStorage"
-import { getMe } from "../../../api/auth"
-import { setLocation } from "../app"
+// import { getMe } from "../../../api/auth"
+import { goToPage, setLocation } from "../app"
 import { getNotification } from "../../../utils/helper"
 
 function* loadRouteData() {
@@ -15,19 +15,18 @@ function* handleActions() {
     let token = action.payload.data.access_token;
     setAuthToken(token);
     yield put(setLocation({ pathName: "/home" }))
-    yield
   })
 
-  yield takeLatest(startRequestRegisterFail, function* () {
+  yield takeLatest(startRequestRegisterFail, function () {
     getNotification("error", "Register fail")
-    yield
   })
 
   yield takeLatest(startRequestLoginSuccess, function* (action) {
     getNotification("success", "Login success")
     let token = action.payload.data.access_token
     setAuthToken(token)
-    yield put(getMe())
+    // yield put(getMe())
+    yield put(goToPage({path: "/home"}))
   })
 
   yield takeLatest(startRequestLoginFail, function (action) {
