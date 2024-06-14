@@ -1,6 +1,8 @@
 import axios from "axios";  // để call api
 import {isFunction} from 'lodash';  // để kiểm tra biến là hàm hay không
-import { getAuthToken } from "../utils/localStorage"; // để lấy token
+import { getAuthToken, removeAuthToken } from "../utils/localStorage"; // để lấy token
+import { goToPage } from "../states/modules/app";
+import { setAuthSuccess } from "../states/modules/auth";
 
 // nhận đối tượng chứa các tham số được truyền vào
 export default async function callApi ({
@@ -47,6 +49,16 @@ export default async function callApi ({
   .catch((error) => {
     let response = error.response ? error.response : error;
     dispatch(failureType(error.response));
+    if (response.status === 401) {
+      // Nếu mã trạng thái lỗi Unauthorized(ko được phép), xóa token
+      // điều hướng đến trang đăng nhập và cập nhật trạng thái xác thực
+      removeAuthToken()
+      dispatch(goToPage({ path: '/login' }));
+      dispatch(setAuthSuccess(false))
+    } else if (response.status === 403) {
+      // Nếu mã trạng thái lỗi Forbidden(cấm) -> Điều hướng đến trang chủ
+      dispatch(goToPage({ path: '/' }));
+    }
     return response
   })
 }

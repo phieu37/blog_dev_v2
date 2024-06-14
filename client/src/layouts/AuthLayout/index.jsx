@@ -4,7 +4,7 @@ import './styles.scss'
 import PropTypes from "prop-types";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {setLocation} from "../../states/modules/app";
+import {goToPageSuccess, setLocation} from "../../states/modules/app";
 
 AuthLayout.propTypes = {
   title: PropTypes.string.isRequired,
@@ -16,22 +16,31 @@ AuthLayout.defaultProps = {
 
 function AuthLayout(props) {
   const { children, title } = props;
-  const location = useSelector(state => state.app.location);
+  const goToPage = useSelector(state => state.app.goToPage);
+  // const location = useSelector(state => state.app.location);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // kiểm tra thay đổi thông tin về đường dẫn hiện tại và trước đó
   // cập nhật thông tin về đường dẫn và điều hướng đến ỦRL mới
+  // useEffect(() => {
+  //   if (location.pathName !== location.prevPathName) {
+  //     dispatch(setLocation({  
+  //       pathName: location.pathName,
+  //       payload: location.payload,
+  //       prevPathName: location.pathName,
+  //     }));
+  //     navigate(location.pathName);
+  //   }
+  // }, [location, navigate, dispatch]);
+
   useEffect(() => {
-    if (location.pathName !== location.prevPathName) {
-      dispatch(setLocation({  
-        pathName: location.pathName,
-        payload: location.payload,
-        prevPathName: location.pathName,
-      }));
-      navigate(location.pathName);
+    if (goToPage.path && !goToPage.redirected) {
+        dispatch(goToPageSuccess());
+        navigate(goToPage.path);
     }
-  }, [location, navigate, dispatch]);
+}, [goToPage, navigate, dispatch]);
+
 
   return (
     <div className={styles.layoutAuthWrap}>

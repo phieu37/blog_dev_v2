@@ -9,6 +9,7 @@ import loadCategorySaga from "../states/modules/category/saga"
 import loadPostSaga from "../states/modules/post/saga"
 import loadPostDetailSaga from "../states/modules/post-detail/saga"
 import loadCategoryDetailSaga from "../states/modules/category-detail/saga"
+import loadNoLoginSaga from "../states/modules/no-login/saga"
 
 export const ROUTE_SAGAS = []
 ROUTE_SAGAS["LOAD_AUTH_PAGE"] = loadAuthSaga
@@ -22,3 +23,4 @@ ROUTE_SAGAS["LOAD_CATEGORY_PAGE"] = loadCategorySaga
 ROUTE_SAGAS["LOAD_CATEGORY_DETAIL_PAGE"] = loadCategoryDetailSaga
 ROUTE_SAGAS["LOAD_POST_PAGE"] = loadPostSaga
 ROUTE_SAGAS["LOAD_POST_DETAIL_PAGE"] = loadPostDetailSaga
+ROUTE_SAGAS["LOAD_NO_LOGIN_PAGE"] = loadNoLoginSaga

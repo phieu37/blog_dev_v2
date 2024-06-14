@@ -57,11 +57,7 @@ const Header = () => {
                 loading={false}
                 onClick={handleLoginClick}
                 disable={false}
-                style={{
-                  // display: "flex",
-                  // justifyContent: "center",
-                  // alignItems: "center"
-                }}
+                style={{}}
               />
             </div>
           </div>

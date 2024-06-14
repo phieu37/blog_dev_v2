@@ -58,6 +58,7 @@ export const MAIL_FROM_NAME = process.env.MAIL_FROM_NAME;
 export const SALT_ROUNDS = 10;
 export const TOKEN_TYPE = {
     AUTHORIZATION: "AUTHORIZATION",
+    FORGOT_PASSWORD: "FORGOT_PASSWORD"
 };
 export const MAX_STRING_SIZE = 255;
 
@@ -124,5 +125,9 @@ export const JOI_DEFAULT_OPTIONS = {
     stripUnknown: true,
 };
 
+// 10 số bắt đầu số 0, tiếp theo [235789] 8 số cuối [0-9]
 export const VALIDATE_PHONE_REGEX = /^(0[235789])[0-9]{8}$/;
+// cho phép các ký tự chữ cái không dấu, có dấu, khoảng trắng
 export const VALIDATE_NAME_REGEX =  /^[a-zA-Z\sÀ-Ỹà-ỹ]+$/;
+// ít nhất 1 chữ viết hoa, 1 viết thường, 1 số, một ký tự đặc biệt, độ dài từ 6-50
+export const VALIDATE_PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{6,50}$/;

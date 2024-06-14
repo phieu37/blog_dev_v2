@@ -40,7 +40,7 @@ function Login() {
   // đăng nhập thành công điều hướng đến trang chính
   useEffect(() => {
     if (isAuthSuccess) {
-      navigate('/')
+      navigate('/home')
     }
   }, [isAuthSuccess, navigate])
 

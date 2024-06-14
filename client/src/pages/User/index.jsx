@@ -1,5 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
+import { PlusOutlined } from '@ant-design/icons';
+import { Switch, Tooltip } from 'antd';
 import MainLayout from '../../layouts/MainLayout';
 import styles from './styles.module.scss';
 import TableCustom from '../../components/UI/Table'
@@ -7,21 +9,40 @@ import InputMASQ from "../../components/UI/Input";
 import ButtonMASQ from "../../components/UI/Button";
 import IconDeleteTable from "../../assets/images/icon/table/delete_14x14.svg";
 import IconEditTable from "../../assets/images/icon/table/edit_12x12.svg";
+import IconRepeatTable from "../../assets/images/icon/table/repeat_16x16.svg";
 // import SwitchMASQ from "../../components/UI/Switch";
 import CreateOrUpdate from "./components/CreateOrUpdate";
 import ModalConfirm from "../../components/UI/Modal/ModalConfirm";
 import { useDispatch, useSelector } from "react-redux";
-import { getListUser, handleDeleteUser } from "../../api/user";
-import { setVisibleModalCreateOrUpdateUser, setVisibleModalDeleteUser } from "../../states/modules/user";
+import { changeStatusUser, getListUser, handleDeleteUser, resetPasswordUser } from "../../api/user";
+import { setIdUser, setVisibleModalChangePassword, setVisibleModalChangeStatus, setVisibleModalCreateOrUpdateUser, setVisibleModalDeleteUser } from "../../states/modules/user";
 import _ from "lodash";
 import UserImg from '../../assets/images/user/avatar_default.jpg';
-// import Filter from './components/Filter';
-// import BtnFilter from "../../components/ButtonFilter";
-import { PlusOutlined } from '@ant-design/icons';
+import ChangePassword from './components/ChangePassword';
+import ModalDefault from '../../components/Modal';
 
 function User() {
   // lấy thông tin người dùng hiện tại từ Redux store(từ state authUser trong reducer auth)
   const authUser = useSelector(state => state.auth.authUser);
+  const visibleModalChangeStatus = useSelector(state => state.user.visibleModalChangeStatus);
+
+  const [userId, setUserId] = useState(null);
+  const [userStatus, setUserStatus] = useState(false);
+  const [contentModalChangeStatus, setContentModalChangeStatus] = useState('');
+
+  const openModalChangeStatus = (e, user) => {
+    setUserId(user._id)
+    setUserStatus(e)
+    setContentModalChangeStatus(<span>Are you sure you want to {e ? 'unlock' : 'lock'} account <div><b>{user.name}</b>?</div></span>)
+    dispatch(setVisibleModalChangeStatus(true))
+  }
+
+  const handleConfirmChangeStatus = () => {
+    if (userId) {
+      dispatch(changeStatusUser(userId, userStatus ? 1 : 0))
+    }
+  }
+
   // mảng chứa các cấu hình cho từng cột trong bảng dữ liệu
   const columns = [
     {
@@ -59,32 +80,45 @@ function User() {
       sorter: true,
     },
     {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      align: 'center',
+      showSorterTooltip: false,
+      sorter: (a, b) => a.age - b.age,
+      render: (text, record) => <Switch
+        checked={text}
+        onChange={(e) => openModalChangeStatus(e, record)}
+      />
+    },
+    {
       title: 'Actions',
       key: 'action',
       fixed: 'right',
       align: 'center',
-      width: '80px',
+      width: '100px',
       render: (field, record) => (
         <>
-          {
-            // kiểm tra quyền sửa/xóa chỉ hiển thị nếu trùng id
-            // authUser.id !== record.id ?
-            authUser.id === record.id ?
-              <div className={styles.btnAction}>
+          {authUser.id === record.id && (
+            <div className={styles.btnAction}>
+              <Tooltip title="Edit">
                 <div onClick={() => handleEdit(record)} className={styles.btnWrap}>
                   <img src={IconEditTable} alt="icon-edit" />
                 </div>
-                {
-                  // authUser.id !== record.id ?
-                  authUser.id === record.id ?
-                    <div onClick={() => handleShowConfirmDelete(record)} className={styles.btnWrap}>
-                      <img src={IconDeleteTable} alt="icon-delete" />
-                    </div> : ''
-                }
-              </div> : ''
-          }
+              </Tooltip>
+              <Tooltip title="Change password">
+                <div onClick={() => handleShowConfirmResetPassword(record)} className={styles.btnWrap}>
+                  <img src={IconRepeatTable} alt="icon-repeat" />
+                </div>
+              </Tooltip>
+              <Tooltip title="Delete">
+                <div onClick={() => handleShowConfirmDelete(record)} className={styles.btnWrap}>
+                  <img src={IconDeleteTable} alt="icon-delete" />
+                </div>
+              </Tooltip>
+            </div>
+          )}
         </>
-
       ),
     },
   ];
@@ -94,6 +128,7 @@ function User() {
   const isLoadingTableUser = useSelector(state => state.user.isLoadingTableUser); // Lấy trạng thái loading
   const paginationListUser = useSelector(state => state.user.paginationListUser); // Lấy thông tin phân trang
   const visibleModalDeleteUser = useSelector(state => state.user.visibleModalDeleteUser); // Lấy trạng thái hiển thị modal xác nhận xóa
+  const visibleModalResetPassword = useSelector(state => state.user.visibleModalResetPassword); // Lấy trạng thái hiển thị modal xác nhận xóa
 
   // tạo ra các state cục bộ trong functional component
   const [user, setUser] = useState({}); // lưu thông tin user được chọn để sửa/xóa
@@ -129,7 +164,6 @@ function User() {
   // Dispatch action hiển thị modal cập nhật user và cấu hình kiểu, tiêu đề của modal
   // đồng thời set user được chọn vào state user
   const handleEdit = (user) => {
-    console.log('🚀 ~ handleEdit ~ user:', user)
     let userSelect = _.cloneDeep(user)
     setUser(userSelect)
     dispatch(setVisibleModalCreateOrUpdateUser(true))
@@ -149,6 +183,21 @@ function User() {
   // Dispatch action xác nhận xóa user
   const handleConfirmDeleteUser = () => {
     dispatch(handleDeleteUser(user._id))
+  }
+
+  const handleShowConfirmResetPassword = (user) => {
+    let userSelect = _.cloneDeep(user)
+    setUser(userSelect)
+    dispatch(setVisibleModalChangePassword(true))
+    dispatch(setIdUser(user._id))
+  }
+
+  // const handleConfirmResetPassword = () => {
+  //   dispatch(resetPasswordUser(user._id))
+  // }
+
+  const handleToggleVisibleModalChangePassword = () => {
+    dispatch(setVisibleModalChangePassword(!visibleModalResetPassword));
   }
 
   // Hàm xử lý khi user thay đổi trang hiện tại
@@ -249,13 +298,13 @@ function User() {
           />
         </div>
 
-        {/* Modal xuất hiện khi user muốn tạo/cập nhật */}
+        {/* Modal tạo/cập nhật */}
         <CreateOrUpdate
           user={user}
           configModal={configModal}
         />
 
-        {/* modal xác nhận xóa người dùng */}
+        {/* modal xác nhận xóa */}
         <ModalConfirm
           isModalOpen={visibleModalDeleteUser}
           title={`Delete ${user.name}?`}
@@ -263,6 +312,29 @@ function User() {
           onClose={() => dispatch(setVisibleModalDeleteUser(false))}
           onConfirm={() => handleConfirmDeleteUser()}
         />
+
+        {/* Modal thay đổi status */}
+        <ModalConfirm
+          isModalOpen={visibleModalChangeStatus}
+          title={`Confirm status`}
+          description={contentModalChangeStatus}
+          onClose={() => dispatch(setVisibleModalChangeStatus(false))}
+          onConfirm={() => handleConfirmChangeStatus()}
+        />
+
+        {/* change password */}
+        <ModalDefault
+          isModalOpen={visibleModalResetPassword}
+          title={`Change password`}
+          description={`Are you sure you want change password ${user.name}? `}
+          handleOk={() => handleToggleVisibleModalChangePassword()}
+          handleCancel={() => handleToggleVisibleModalChangePassword()}
+        >
+          <ChangePassword
+            closeModal={() => handleToggleVisibleModalChangePassword()}
+          />
+        </ModalDefault>
+
       </div>
     </MainLayout >
   );

@@ -8,7 +8,7 @@ import {
 export const login = (data) => async (dispatch, getState) => {
   return callApi({
     method: 'post',
-    apiPath: `auth/login`,
+    apiPath: `admin/auth/login`,
     actionTypes: [startRequestLogin, startRequestLoginSuccess, startRequestLoginFail],
     variables: {
       email: data.email,
@@ -22,7 +22,7 @@ export const login = (data) => async (dispatch, getState) => {
 export const getMe = () => async (dispatch, getState) => {
   return callApi({
     method: 'get',
-    apiPath: `auth/me`,
+    apiPath: `admin/auth/me`,
     actionTypes: [startRequestGetMe, startRequestGetMeSuccess, startRequestGetMeFail],
     variables: {},
     dispatch,

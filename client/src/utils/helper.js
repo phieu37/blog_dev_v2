@@ -144,3 +144,29 @@ export const getNotification = (type, content, duration = 3, align = 'top') => {
   });
 };
 
+export const convertQueryStringToObject = (queryString) => {
+  if (queryString.charAt(0) === '?') {
+    queryString = queryString.substring(1);
+  }
+
+  var pairs = queryString.split('&');
+  var result = {};
+
+  for (var i = 0; i < pairs.length; i++) {
+    var pair = pairs[i].split('=');
+    var key = decodeURIComponent(pair[0]);
+    var value = decodeURIComponent(pair[1] || '');
+
+    if (Object.prototype.hasOwnProperty.call(result, key)) {
+      if (!Array.isArray(result[key])) {
+        result[key] = [result[key]];
+      }
+
+      result[key].push(value);
+    } else {
+      result[key] = value;
+    }
+  }
+
+  return result;
+}

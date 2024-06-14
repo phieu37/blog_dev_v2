@@ -4,7 +4,7 @@ import SideBar from "./SiderBar";
 import Header from "./Header";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {setLocation} from "../../states/modules/app";
+import { goToPageSuccess, setLocation} from "../../states/modules/app";
 
 function DefaultLayout(props) {
   const { children } = props;
@@ -14,6 +14,7 @@ function DefaultLayout(props) {
   const location = useSelector(state => state.app.location);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const goToPage = useSelector(state => state.app.goToPage);
 
   useEffect(() => {
     if (location.pathName !== location.prevPathName) {
@@ -25,6 +26,13 @@ function DefaultLayout(props) {
       navigate(location.pathName);
     }
   }, [location, navigate, dispatch]);
+
+  // useEffect(() => {
+  //   if (goToPage.path && !goToPage.redirected) {
+  //     dispatch(goToPageSuccess());
+  //     navigate(goToPage.path);
+  //   }
+  // }, [goToPage, navigate, dispatch]);
 
   return (
     <div className={`${styles.boxMainLayout}`}>

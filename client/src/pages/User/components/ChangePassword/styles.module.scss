@@ -1,0 +1,22 @@
+.labelWrap {
+  margin-bottom: 6px;
+
+  .required {
+    color: red;
+  }
+}
+
+.inputWrap {
+  margin-bottom: 16px;
+}
+
+.buttonWrap {
+  display: flex;
+  justify-content: center;
+
+  .button {
+    color: white;
+    background-color: black;
+    margin-right: 16px;
+  }
+}
