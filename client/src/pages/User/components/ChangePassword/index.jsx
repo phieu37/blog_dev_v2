@@ -19,7 +19,7 @@ export default function ChangePassword(props) {
           Mật khẩu mới <span className={styles.required}>*</span>
         </div>
         <Input.Password
-          placeholder="Nhập mật khẩu"
+          placeholder="Nhập mật khẩu..."
           value={dataChangePassword.password}
           onChange={(e) => handleChangeInput(e, 'password')}
         />
@@ -30,7 +30,7 @@ export default function ChangePassword(props) {
           Xác nhận mật khẩu mới <span className={styles.required}>*</span>
         </div>
         <Input.Password
-          placeholder="Xác nhận mật khẩu"
+          placeholder="Xác nhận mật khẩu..."
           value={dataChangePassword.confirm_password}
           onChange={(e) => handleChangeInput(e, 'confirm_password')}
         />

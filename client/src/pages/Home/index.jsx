@@ -39,7 +39,7 @@ function Home() {
                     <Col xs={12} sm={12} md={12} lg={12} xl={12}>
                       <div className={styles.personalWrap}>
                         <div className={styles.labelWrap}>
-                          Total Users
+                          Người dùng
                         </div>
                         <div className={styles.numberWrap}>
                           {totalUsers.total || "Admin"}
@@ -65,7 +65,7 @@ function Home() {
                   <Col xs={12} sm={12} md={12} lg={12} xl={12}>
                     <div className={styles.personalWrap}>
                       <div className={styles.labelWrap}>
-                        Total Authors
+                        Tác giả
                       </div>
                       <div className={styles.numberWrap}>
                         {totalAuthors.total}
@@ -90,7 +90,7 @@ function Home() {
                   <Col xs={12} sm={12} md={12} lg={12} xl={12}>
                     <div className={styles.personalWrap}>
                       <div className={styles.labelWrap}>
-                        Total Categories
+                        Danh mục
                       </div>
                       <div className={styles.numberWrap}>
                         {totalCategories.total}
@@ -115,7 +115,7 @@ function Home() {
                   <Col xs={12} sm={12} md={12} lg={12} xl={12}>
                     <div className={styles.personalWrap}>
                       <div className={styles.labelWrap}>
-                        Total Post
+                        Bài viết
                       </div>
                       <div className={styles.numberWrap}>
                         {totalPosts.total}

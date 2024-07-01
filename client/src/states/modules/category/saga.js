@@ -18,14 +18,12 @@ import { getNotification } from "../../../utils/helper"
 import _ from "lodash"
 
 function* loadRouteData() {
-  yield put(setTitlePage("Category"))
-
-  // yield put(getListCategory())
+  yield put(setTitlePage("Quản lý danh mục"))
 }
 
 function* handleActions() {
   yield takeLatest(createCategorySuccess, function* () {
-    getNotification("success", "Create category success")
+    getNotification("success", "Tạo mới danh mục thành công")
     yield put(setVisibleModalCreateOrUpdateCategory(false))
     yield put(getListCategory());
   })
@@ -41,11 +39,11 @@ function* handleActions() {
         })
       )
     }
-    getNotification("error", "Create category fail")
+    getNotification("error", "Tạo mới danh mục thất bại")
   })
 
   yield takeLatest(updateCategorySuccess, function* () {
-    getNotification("success", "Update category success")
+    getNotification("success", "Cập nhật danh mục thành công")
     yield put(setVisibleModalCreateOrUpdateCategory(false))
     yield put(getListCategory())
   })
@@ -61,7 +59,7 @@ function* handleActions() {
         })
       )
     }
-    getNotification("error", "Update category fail")
+    getNotification("error", "Cập nhật danh mục thất bại")
   })
 
   yield takeLatest(deleteCategorySuccess, function* () {
@@ -71,7 +69,7 @@ function* handleActions() {
   })
 
   yield takeLatest(deleteCategoryFail, function* () {
-    yield call(getNotification, "error", "Failed to delete category.")
+    yield call(getNotification, "error", "Lỗi xóa danh mục.")
   })
 }
 

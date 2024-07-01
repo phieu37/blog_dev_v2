@@ -33,7 +33,7 @@ function User() {
   const openModalChangeStatus = (e, user) => {
     setUserId(user._id)
     setUserStatus(e)
-    setContentModalChangeStatus(<span>Are you sure you want to {e ? 'unlock' : 'lock'} account <div><b>{user.name}</b>?</div></span>)
+    setContentModalChangeStatus(<span>Bạn có chắc chắn muốn {e ? <b>mở khóa</b> : <b>khóa</b>} account <div><b>{user.name}</b>?</div></span>)
     dispatch(setVisibleModalChangeStatus(true))
   }
 
@@ -46,7 +46,7 @@ function User() {
   // mảng chứa các cấu hình cho từng cột trong bảng dữ liệu
   const columns = [
     {
-      title: 'Name',
+      title: 'Họ và tên',
       dataIndex: 'name',  // Tên trường dữ liệu tương ứng trong mỗi bản ghi
       key: 'name',        // key duy nhất để xác định cột
       render: (field, record) =>  // field(giá trị của trường dữ liệu), record(toàn bộ dữ liệu của bản ghi)
@@ -71,7 +71,7 @@ function User() {
       sorter: true,
     },
     {
-      title: 'Phone',
+      title: 'Số điện thoại',
       dataIndex: 'phone',
       key: 'phone',
       render: (field) => <span>{field || "Đang cập nhật"}</span>,
@@ -80,10 +80,11 @@ function User() {
       sorter: true,
     },
     {
-      title: 'Status',
+      title: 'Trạng thái',
       dataIndex: 'status',
       key: 'status',
       align: 'center',
+      width: '120px',
       showSorterTooltip: false,
       sorter: (a, b) => a.age - b.age,
       render: (text, record) => <Switch
@@ -92,26 +93,26 @@ function User() {
       />
     },
     {
-      title: 'Actions',
+      title: 'Hành động',
       key: 'action',
       fixed: 'right',
       align: 'center',
-      width: '100px',
+      width: '110px',
       render: (field, record) => (
         <>
           {authUser.id === record.id && (
             <div className={styles.btnAction}>
-              <Tooltip title="Edit">
+              <Tooltip title="Sửa">
                 <div onClick={() => handleEdit(record)} className={styles.btnWrap}>
                   <img src={IconEditTable} alt="icon-edit" />
                 </div>
               </Tooltip>
-              <Tooltip title="Change password">
+              <Tooltip title="Đổi mật khẩu">
                 <div onClick={() => handleShowConfirmResetPassword(record)} className={styles.btnWrap}>
                   <img src={IconRepeatTable} alt="icon-repeat" />
                 </div>
               </Tooltip>
-              <Tooltip title="Delete">
+              <Tooltip title="Xóa">
                 <div onClick={() => handleShowConfirmDelete(record)} className={styles.btnWrap}>
                   <img src={IconDeleteTable} alt="icon-delete" />
                 </div>
@@ -133,7 +134,7 @@ function User() {
   // tạo ra các state cục bộ trong functional component
   const [user, setUser] = useState({}); // lưu thông tin user được chọn để sửa/xóa
   const [configModal, setConfigModal] = useState({  // lưu cấu hình của modal tạo/cập nhật
-    title: 'Create user',
+    title: 'Tạo mới người dùng',
     type: 'CREATE'
   })
   const [dataFilter, setDataFilter] = useState({  // lưu các thông tin để lọc và phân trang
@@ -157,7 +158,7 @@ function User() {
   const handleCreate = () => {
     dispatch(setVisibleModalCreateOrUpdateUser(true))
     setConfigModal({
-      title: "Create user",
+      title: "Tạo mới người dùng",
       type: "CREATE"
     })
   }
@@ -168,7 +169,7 @@ function User() {
     setUser(userSelect)
     dispatch(setVisibleModalCreateOrUpdateUser(true))
     setConfigModal({
-      title: "Update user",
+      title: "Cập nhật người dùng",
       type: "UPDATE"
     })
   }
@@ -237,19 +238,21 @@ function User() {
         <div className={styles.mainWrap}>
           {/* tiêu đề và nút tạo */}
           <div className={styles.headerMainWrap}>
-            <span className={styles.title}>Total pages ({paginationListUser.totalPage})</span>
+            <span className={styles.title}>Tổng số mục ({paginationListUser.totalPage})</span>
             <div className={styles.btnWrap}>
               <div className={styles.btnWrapIcon}>
                 <PlusOutlined />
               </div>
-              <ButtonMASQ
-                onClick={() => handleCreate()}
-                style={{
-                  minWidth: "120px",
-                }}
-                textBtn={'Create'}
-              >
-              </ButtonMASQ>
+              <div>
+                <ButtonMASQ
+                  onClick={() => handleCreate()}
+                  style={{
+                    minWidth: "120px",
+                  }}
+                  textBtn={'Thêm mới'}
+                >
+                </ButtonMASQ>
+              </div>
             </div>
           </div>
 
@@ -257,7 +260,7 @@ function User() {
           <div className={styles.boxFilterWrap}>
             <div className={styles.inputWrap}>
               <InputMASQ
-                placeholder="Search by name, email or phone"
+                placeholder="Tìm kiếm theo họ và tên, email hoặc số điên thoại..."
                 value={dataFilter.keySearch}
                 onChange={(e) => handleSearch(e)}
               />
@@ -307,8 +310,8 @@ function User() {
         {/* modal xác nhận xóa */}
         <ModalConfirm
           isModalOpen={visibleModalDeleteUser}
-          title={`Delete ${user.name}?`}
-          description={`Are you sure you want to delete ${user.name}? Your action can not be undone.`}
+          title={`Xóa ${user.name}?`}
+          description={`Bạn có chắc chắn muốn xóa ${user.name}? Hành động của bạn không thể hoàn tác.`}
           onClose={() => dispatch(setVisibleModalDeleteUser(false))}
           onConfirm={() => handleConfirmDeleteUser()}
         />
@@ -316,7 +319,7 @@ function User() {
         {/* Modal thay đổi status */}
         <ModalConfirm
           isModalOpen={visibleModalChangeStatus}
-          title={`Confirm status`}
+          title={`Xác nhận trạng thái`}
           description={contentModalChangeStatus}
           onClose={() => dispatch(setVisibleModalChangeStatus(false))}
           onConfirm={() => handleConfirmChangeStatus()}
@@ -325,8 +328,8 @@ function User() {
         {/* change password */}
         <ModalDefault
           isModalOpen={visibleModalResetPassword}
-          title={`Change password`}
-          description={`Are you sure you want change password ${user.name}? `}
+          title={`Đổi mật khẩu`}
+          description={`Bạn có chắc chắn muốn đổi mật khẩu ${user.name}? `}
           handleOk={() => handleToggleVisibleModalChangePassword()}
           handleCancel={() => handleToggleVisibleModalChangePassword()}
         >

@@ -77,26 +77,26 @@ const CustomCKEditor = (props) => {
         },
         fontSize: {
             options: [
-                9,
+                // 9,
                 10,
-                11,
+                // 11,
                 12,
-                13,
+                // 13,
                 'default',
-                15,
+                // 15,
                 16,
                 // 17,
-                // 18,
+                18,
                 // 19,
-                // 20,
+                20,
                 // 21,
                 // 22,
                 // 23,
-                // 24,
+                24,
                 // 26,
                 // 28,
-                // 36,
-                // 48,
+                36,
+                48,
                 // 72,
             ],
             supportAllValues: true
@@ -113,7 +113,7 @@ const CustomCKEditor = (props) => {
                     }
                 }
             }
-        },
+        }
     };
 
     return (

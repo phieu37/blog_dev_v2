@@ -46,7 +46,7 @@ const appSlice = createSlice({
       }
     }),
     goToPage: (state, action) => {
-      console.log('🚀 ~ state, action:', state, action)
+      // console.log('🚀 ~ state, action:', state, action)
       return (
         {
           ...state,

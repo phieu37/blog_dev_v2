@@ -6,7 +6,6 @@ import _ from "lodash";
 // import { isValidate } from "../../../../utils/validate";
 import { handleCheckValidateConfirm } from "../../../../utils/helper";
 import ModalGeneral from "../../../../components/UI/Modal/ModalGeneral";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setErrorCreateOrUpdatePost,
@@ -16,14 +15,6 @@ import { handleCreatePost, handleUpdatePost } from "../../../../api/post";
 import { Button, Select, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import CustomCKEditor from '../../../../components/Ckeditor5';
-
-CreateOrUpdate.prototype = {
-  isModalOpen: PropTypes.bool.isRequired,
-  isLoadingTable: PropTypes.bool.isRequired,
-  configModal: PropTypes.object.isRequired,
-  onClose: PropTypes.func,
-  onConfirm: PropTypes.func,
-}
 
 CreateOrUpdate.defaultProps = {
   isModalOpen: false,

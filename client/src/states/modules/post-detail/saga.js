@@ -4,7 +4,7 @@ import { all, fork, put } from "redux-saga/effects"
 import { setTitlePage } from "../app"
 
 function* loadRouteData() {
-  yield put(setTitlePage("Post detail"))
+  yield put(setTitlePage("Chi tiết bài viết"))
 
 }
 

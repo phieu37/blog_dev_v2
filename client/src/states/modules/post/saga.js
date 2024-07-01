@@ -18,13 +18,13 @@ import { getNotification } from "../../../utils/helper"
 import _ from "lodash"
 
 function* loadRouteData() {
-  yield put(setTitlePage("Post"))
+  yield put(setTitlePage("Quản lý bài viết"))
   // yield put(getListPost())
 }
 
 function* handleActions() {
   yield takeLatest(createPostSuccess, function* () {
-    getNotification("success", "Create post success")
+    getNotification("success", "Tạo mới bài viết thành công")
     yield put(setVisibleModalCreateOrUpdatePost(false))
     yield put(getListPost());
   })
@@ -42,11 +42,11 @@ function* handleActions() {
         })
       )
     }
-    getNotification("error", "Create post fail")
+    getNotification("error", "Tạo mới bài viết thất bại")
   })
 
   yield takeLatest(updatePostSuccess, function* () {
-    getNotification("success", "Update post success")
+    getNotification("success", "Cập nhật bài viết thành công")
     yield put(setVisibleModalCreateOrUpdatePost(false))
     yield put(getListPost())
   })
@@ -64,17 +64,17 @@ function* handleActions() {
         })
       )
     }
-    getNotification("error", "Update post fail")
+    getNotification("error", "Cập nhật bài viết thất bại")
   })
 
   yield takeLatest(deletePostSuccess, function* () {
-    getNotification("success", "Delete post success")
+    getNotification("success", "Xóa bài viết thành công")
     yield put(setVisibleModalDeletePost(false))
     yield put(getListPost())
   })
 
   yield takeLatest(deletePostFail, function* () {
-    yield call(getNotification, "error", "Failed to delete post.")
+    yield call(getNotification, "error", "Lỗi xóa bài viết.")
   })
 }
 

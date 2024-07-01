@@ -29,8 +29,10 @@ export const rootLoader = async ({ request, params }, requiredAuth, saga = null,
       // không được xác thực -> login
       return redirect("/login")
     }
-  } else if (auth.isAuthSuccess) {
+  // } else if (auth.isAuthSuccess) {
     // đã xác thực -> home
+  } else if (auth.isAuthSuccess && url.pathname === "/login") {
+    // đã xác thực -> home, nếu trang hiện tại là /login
     return redirect("/home")
   }
 

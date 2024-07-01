@@ -1,12 +1,5 @@
 @import "../../../assets/scss/variables";
 
-.table-custom {
-  overflow: hidden;
-  .ant-table {
-    .ant-table-thead {
-      .ant-table-cell {
-        color: $colorBlack;
-      }
-    }
-  }
+.ant-list-items a li.ant-list-item.item-separator {
+  border-bottom: 1px solid #ccc;
 }

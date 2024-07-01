@@ -1,11 +1,8 @@
-import {
-  all, fork, put
-
-} from "redux-saga/effects";
+import {  all, fork, put} from "redux-saga/effects";
 import {setTitlePage} from "../app";
 
 function* loadRouteData () {
-  yield put(setTitlePage('NoLogin'))
+  yield put(setTitlePage('Danh sách bài viết'))
 }
 
 function* handleActions () {

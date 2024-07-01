@@ -100,7 +100,7 @@ function CreateOrUpdate(props) {
 
   const handleConfirmCreateOrUpdateUser = () => {
     let dataValidate = dataCreateOrUpdate;
-    console.log('🚀 ~ handleConfirmCreateOrUpdateUser ~ dataValidate:', dataValidate)
+    // console.log('🚀 ~ handleConfirmCreateOrUpdateUser ~ dataValidate:', dataValidate)
     let data = new FormData();
     data.append(`name`, dataCreateOrUpdate.name);
     data.append(`email`, dataCreateOrUpdate.email);
@@ -146,10 +146,10 @@ function CreateOrUpdate(props) {
     >
       <div className={styles.mainModalWrap}>
         <div className={styles.inputWrapper}>
-          <div className={styles.label}>Name *</div>
+          <div className={styles.label}>Họ và tên *</div>
           <InputMASQ
             type={"text"}
-            placeholder={"Enter name..."}
+            placeholder={"Nhập tên..."}
             onChange={(e) => handleChangeInput(e, 'name')}
             onBlur={() => validateBlur('name')}
             value={dataCreateOrUpdate.name}
@@ -161,7 +161,7 @@ function CreateOrUpdate(props) {
           <div className={styles.label}>Email *</div>
           <InputMASQ
             type={"text"}
-            placeholder={"Enter email..."}
+            placeholder={"Nhập email..."}
             onChange={(e) => handleChangeInput(e, 'email')}
             onBlur={() => validateBlur('email')}
             value={dataCreateOrUpdate.email}
@@ -170,10 +170,10 @@ function CreateOrUpdate(props) {
         </div>
 
         <div className={styles.inputWrapper}>
-          <div className={styles.label}>Phone *</div>
+          <div className={styles.label}>Số điện thoại *</div>
           <InputMASQ
             type={"text"}
-            placeholder={"Enter phone..."}
+            placeholder={"Nhập số điện thoại..."}
             onChange={(e) => handleChangeInput(e, 'phone')}
             onBlur={() => validateBlur('phone')}
             value={dataCreateOrUpdate.phone}
@@ -184,10 +184,10 @@ function CreateOrUpdate(props) {
         {
           configModal.type === "CREATE" ?
             <div className={styles.inputWrapper}>
-              <div className={styles.label}>Password *</div>
+              <div className={styles.label}>Mật khẩu *</div>
               <InputMASQ
                 type={"password"}
-                placeholder={"Enter password..."}
+                placeholder={"Nhập mật khẩu..."}
                 onChange={(e) => handleChangeInput(e, 'password')}
                 onBlur={() => validateBlur('password')}
                 value={dataCreateOrUpdate.password}
@@ -199,10 +199,10 @@ function CreateOrUpdate(props) {
         {
           configModal.type === "CREATE" ?
             <div className={styles.inputWrapper}>
-              <div className={styles.label}>Confirm password *</div>
+              <div className={styles.label}>Xác nhận mật khẩu *</div>
               <InputMASQ
                 type={"password"}
-                placeholder={"Enter password..."}
+                placeholder={"Nhập lại mật khẩu..."}
                 onChange={(e) => handleChangeInput(e, 'confirmPassword')}
                 onBlur={() => validateBlur('confirmPassword')}
                 value={dataCreateOrUpdate.confirmPassword}
@@ -212,7 +212,7 @@ function CreateOrUpdate(props) {
         }
 
         <div className={styles.inputWrapper}>
-          <div className={styles.label}>Status *</div>
+          <div className={styles.label}>Trạng thái *</div>
           <Switch
             checked={dataCreateOrUpdate.status}
             onChange={(e) => handleChangeSwitch(e, 'status')}
@@ -233,7 +233,7 @@ function CreateOrUpdate(props) {
 
         <div className={styles.btnWrap}>
           <ButtonMASQ
-            textBtn={'Save'}
+            textBtn={'Lưu'}
             loading={isLoadingBtnCreateOrUpdateUser}
             onClick={() => handleConfirmCreateOrUpdateUser()}
             disable={false}

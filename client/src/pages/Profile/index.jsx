@@ -17,7 +17,7 @@ function Profile() {
   const items = [
     {
       key: '1',
-      label: 'Edit profile',
+      label: 'Chỉnh sửa hồ sơ',
     }
   ];
 
@@ -64,6 +64,7 @@ function Profile() {
                 </div>
 
               </div>
+              
               <div className={`${styles.tabWrap} tab-custom`}>
                 <Tabs defaultActiveKey={keyTable} items={items} onChange={onChange} />
               </div>

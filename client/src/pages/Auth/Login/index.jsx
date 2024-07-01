@@ -155,14 +155,14 @@ function Login() {
           />
         </div>
 
-        <div className={styles.btnSwitchWrap}>
+        {/* <div className={styles.btnSwitchWrap}>
           <div className={styles.btnRegister}>
             {"Don't have an account? "}
             <span className={styles.textRegister} onClick={() => navigate('/register')}>
               Signup now
             </span>
           </div>
-        </div>
+        </div> */}
 
         {/* <Social /> */}
       </div>

@@ -30,7 +30,7 @@ function* loadRouteData () {
 
 function* handleActions () {
   yield takeLatest(updateInfoUserSuccess, function* () {
-    getNotification('success', 'Update info user success');
+    getNotification('success', 'Cập nhật thông tin thành công');
     yield put(getMe());
   });
 
@@ -44,11 +44,11 @@ function* handleActions () {
         phone: _.get(errors, 'phone', ''),
       }));
     }
-    getNotification('error', 'Create info user fail');
+    getNotification('error', 'Cập nhật thông tin thất bại');
   });
 
   yield takeLatest(changePasswordSuccess, function* () {
-    yield call(getNotification, 'success', 'Change password success');
+    yield call(getNotification, 'success', 'Đổi mật khẩu thành công');
     yield put(getMe());
   });
 
@@ -62,11 +62,11 @@ function* handleActions () {
         confirmPassword: _.get(errors, 'password_confirmation', ''),
       }));
     }
-    getNotification('error', 'Change password fail');
+    getNotification('error', 'Đổi mật khẩu thất bại');
   });
 
   yield takeLatest(changeAvatarSuccess, function* () {
-    yield call(getNotification, 'success', 'Change avatar success');
+    yield call(getNotification, 'success', 'Thay đổi avatar thành công');
     yield put(getMe());
   });
 }

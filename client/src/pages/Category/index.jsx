@@ -35,7 +35,7 @@ function Category() {
   // mảng chứa các cấu hình cho từng cột trong bảng dữ liệu
   const columns = [
     {
-      title: 'Name',
+      title: 'Tên danh mục',
       dataIndex: 'name',
       key: 'name',
       render: (field) => <span>{field || "Đang cập nhật"}</span>,
@@ -44,7 +44,7 @@ function Category() {
       sorter: true,
     },
     {
-      title: 'Description',
+      title: 'Mô tả',
       dataIndex: 'description',
       key: 'description',
       render: (field) => <span>{field || "Đang cập nhật"}</span>,
@@ -53,7 +53,7 @@ function Category() {
       // sorter: true,
     },
     {
-      title: 'Actions',
+      title: 'Hành động',
       key: 'action',
       fixed: 'right',
       align: 'center',
@@ -61,31 +61,29 @@ function Category() {
       render: (field, record) => (
         <>
           {
-            authAuthor.id === record.id ?
-              <div className={styles.btnAction}>
-                <Tooltip title="Edit">
-                  <div onClick={() => handleEdit(record)} className={styles.btnWrap}>
-                    <img src={IconEditTable} alt="icon-edit" />
-                  </div>
-                </Tooltip>
-                {
-                  authAuthor.id === record.id &&
-                  <div className={styles.btnWrap}>
-                    <Tooltip title="Delete">
-                      <div onClick={() => handleShowConfirmDelete(record)}>
-                        <img src={IconDeleteTable} alt="icon-delete" />
-                      </div>
-                    </Tooltip>
-                  </div>
-                }
-                {
-                  <Tooltip title="Detail">
-                    <div onClick={() => navigate(`/categories/${record._id}`)} className={styles.btnWrap}>
-                      <img className={styles.btnWrapImg} src={IconDetailTable} alt="icon-delete" />
+            <div className={styles.btnAction}>
+              <Tooltip title="Sửa">
+                <div onClick={() => handleEdit(record)} className={styles.btnWrap}>
+                  <img src={IconEditTable} alt="icon-edit" />
+                </div>
+              </Tooltip>
+              {
+                <div className={styles.btnWrap}>
+                  <Tooltip title="Xóa">
+                    <div onClick={() => handleShowConfirmDelete(record)}>
+                      <img src={IconDeleteTable} alt="icon-delete" />
                     </div>
                   </Tooltip>
-                }
-              </div> : ''
+                </div>
+              }
+              {
+                <Tooltip title="Xem chi tiết">
+                  <div onClick={() => navigate(`/categories/${record._id}`)} className={styles.btnWrap}>
+                    <img className={styles.btnWrapImg} src={IconDetailTable} alt="icon-delete" />
+                  </div>
+                </Tooltip>
+              }
+            </div>
           }
         </>
 
@@ -193,7 +191,7 @@ function Category() {
         <div className={styles.mainWrap}>
           {/* tiêu đề và nút tạo */}
           <div className={styles.headerMainWrap}>
-            <span className={styles.title}>Total pages ({paginationListCategory.totalPage})</span>
+            <span className={styles.title}>Tổng số mục ({paginationListCategory.totalPage})</span>
             <div className={styles.btnWrap}>
               <div className={styles.btnWrapIcon}>
                 <PlusOutlined />
@@ -203,7 +201,7 @@ function Category() {
                 style={{
                   minWidth: "120px",
                 }}
-                textBtn={'Create'}
+                textBtn={'Thêm mới'}
               >
               </ButtonMASQ>
             </div>
@@ -213,7 +211,7 @@ function Category() {
           <div className={styles.boxFilterWrap}>
             <div className={styles.inputWrap}>
               <InputMASQ
-                placeholder="Search by name..."
+                placeholder="Tìm kiếm theo tên danh mục..."
                 value={dataFilter.keySearch}
                 onChange={(e) => handleSearch(e)}
               />
@@ -264,8 +262,8 @@ function Category() {
         <ModalConfirm
           // loading={isLoadingBtnDeleteCategory}
           isModalOpen={visibleModalDeleteCategory}
-          title={`Delete ${category.name}?`}
-          description={`Are you sure you want to delete ${category.name}? Your action can not be undone.`}
+          title={`Xóa ${category.name}?`}
+          description={`Bạn có chắc chắn muốn xóa danh mục "${category.name}" ? Hành động của bạn không thể hoàn tác.`}
           onClose={() => dispatch(setVisibleModalDeleteCategory(false))}
           onConfirm={() => handleConfirmDeleteCategory()}
         />

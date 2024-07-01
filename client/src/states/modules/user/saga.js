@@ -32,7 +32,7 @@ function* loadRouteData() {
 
 function* handleActions() {
   yield takeLatest(createUserSuccess, function* () {
-    getNotification("success", "Create user success")
+    getNotification("success", "Tạo mới người dùng thành công")
     yield put(setVisibleModalCreateOrUpdateUser(false))
     yield put(getListUser());
   })
@@ -51,11 +51,11 @@ function* handleActions() {
           status: _.get(errors,'status',''),
         }))
     }
-    getNotification("error", "Create user fail")
+    getNotification("errors", "Tạo mới người dùng thất bại")
   })
 
   yield takeLatest(updateUserSuccess, function* () {
-    getNotification("success", "Update user success")
+    getNotification("success", "Cập nhật người dùng thành công")
     yield put(setVisibleModalCreateOrUpdateUser(false))
     yield put(getListUser())
   })
@@ -73,32 +73,32 @@ function* handleActions() {
           status: _.get(errors,'status',''),
         }))
     }
-    getNotification("error", "Update user fail")
+    getNotification("errors", "Cập nhật thất bại")
   })
 
   yield takeLatest(requestResetPasswordSuccess, function* () {
-    yield call(getNotification, 'success', 'Cập nhật mật khẩu thành công!');
+    yield call(getNotification, 'Thành công', 'Cập nhật mật khẩu thành công!');
     yield put(setVisibleModalChangePassword(false))
   });
 
   yield takeLatest(deleteUserSuccess, function* () {
-    getNotification("success", "Delete user success")
+    getNotification("success", "Xóa người dùng thành công")
     yield put(setVisibleModalDeleteUser(false))
     yield put(getListUser())
   })
 
   yield takeLatest(deleteUserFail, function* () {
-    yield call(getNotification, "error", "Failed to delete user.")
+    yield call(getNotification, "Lỗi", "Lỗi xóa người dùng.")
   })
 
   yield takeLatest(requestChangeStatusSuccess, function* () {
-    getNotification("success", "Change user success")
+    getNotification("success", "Thay đổi trạng thái thành công")
     yield put(setVisibleModalChangeStatus(false))
     yield put(getListUser())
   })
 
   yield takeLatest(requestChangeStatusFail, function* () {
-    yield call(getNotification ,'error', 'Failed to change user');
+    yield call(getNotification ,'errors', 'Lỗi thay đổi trạng thái');
   });
 
 }

@@ -43,7 +43,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <NoLogin />,
     loader: ({ request, params }) => rootLoader(
-      { request, params }, true, "LOAD_NOLOGIN_PAGE"
+      { request, params }, false, "LOAD_NO_LOGIN_PAGE"
     ),
   },
   {
@@ -122,7 +122,7 @@ const router = createBrowserRouter([
     path: "/posts/:postId",
     element: <PostDetail />,
     loader: ({ request, params }) => rootLoader(
-      { request, params }, true, "LOAD_POST_DETAIL_PAGE"
+      { request, params }, false, "LOAD_POST_DETAIL_PAGE"
     ),
   },
 ])

@@ -21,7 +21,7 @@ function ListMASQ(props) {
     description,
     onClick,
     content,
-    getItemUrl
+    getItemUrl,
   } = props;
 
   const IconText = ({ icon, text }) => (
@@ -46,6 +46,7 @@ function ListMASQ(props) {
         const listItem = (
           <List.Item
             key={item._id}
+            className="item-separator"
             actions={actions ? actions(item) : [
               <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
               <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,

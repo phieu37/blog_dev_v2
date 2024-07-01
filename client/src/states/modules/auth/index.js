@@ -8,7 +8,6 @@ const authSlice = createSlice({
   initialState: {
     isAuthSuccess: false, // không có người dùng nào được xác thực
     authUser: {}, // không có thông tin user nào được lưu
-    authAuthor: {}, // không có thông tin author nào được lưu
     errorAuth: {
       name: "",
       email: "",
@@ -20,6 +19,7 @@ const authSlice = createSlice({
     },
     isLoadingBtnLogin: false,
     isLoadingBtnRegister: false,
+    isLoggedIn: false,  // Trạng thái đăng nhập
   },
   // reducers được định nghĩa dưới dạng hàm, mỗi hàm sẽ xử lý một/nhiều hành động và
   // trả về một trạng thái mới cho slice
@@ -49,11 +49,13 @@ const authSlice = createSlice({
     }),
     startRequestGetMeSuccess: (state, action) => ({
       ...state,
+      isLoggedIn: true,
       isAuthSuccess: true,
       authUser: action.payload.data,
     }),
     startRequestGetMeFail: (state) => ({
       ...state,
+      isLoggedIn: false,
       isAuthSuccess: false,
       authUser: {},
     }),
@@ -75,6 +77,7 @@ const authSlice = createSlice({
       ...state,
       isAuthSuccess: action.payload
     }),
+    
   },
 })
 

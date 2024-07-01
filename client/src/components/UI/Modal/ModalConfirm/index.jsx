@@ -6,10 +6,10 @@ import ButtonMASQ from "../../Button";
 
 ModalConfirm.defaultProps = {
   isModalOpen: false,
-  title: 'Delete %record name%?',
-  description: 'Are you sure you want to delete %record name%? Your action can not be undone.',
-  textBtnConfirm: 'OK',
-  textBtnCancel: 'Cancel',
+  title: 'Xóa %record name%?',
+  description: 'Bạn có chắc chắn muốn xóa %record name%? Hành động của bạn không thể hoàn tác.',
+  textBtnConfirm: 'Đồng ý',
+  textBtnCancel: 'Hủy',
   loadingBtnConfirm: false,
   type: 'DEFAULT'
 }
@@ -25,7 +25,7 @@ function ModalConfirm(props) {
       <div className={styles.headerDialogWrap}>
         {
           props.type === 'DEFAULT' ?
-            <span className={styles.title}>Confirmation</span> : ''
+            <span className={styles.title}>Xác nhận</span> : ''
         }
         <div
           onClick={() => props.onClose()}

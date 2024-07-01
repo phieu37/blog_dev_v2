@@ -14,7 +14,7 @@ function DefaultLayout(props) {
   const location = useSelector(state => state.app.location);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const goToPage = useSelector(state => state.app.goToPage);
+  // const goToPage = useSelector(state => state.app.goToPage);
 
   useEffect(() => {
     if (location.pathName !== location.prevPathName) {

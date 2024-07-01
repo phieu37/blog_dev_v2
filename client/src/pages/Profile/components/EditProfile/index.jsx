@@ -109,14 +109,14 @@ function EditProfile() {
         <Col span={12}>
           <div className={`${styles.personalInformation}`}>
             <div className={styles.headerWrap}>
-              <div className={styles.label}>Personal Information</div>
+              <div className={styles.label}>Thông tin cá nhân</div>
             </div>
             <div className={styles.mainWrap}>
               <div className={styles.inputWrapper}>
-                <div className={styles.label}>Name *</div>
+                <div className={styles.label}>Họ và tên *</div>
                 <InputMASQ
                   type={"text"}
-                  placeholder={"Enter name..."}
+                  placeholder={"Nhập họ và tên..."}
                   onChange={(e) => handleChangeInput(e, 'name')}
                   onBlur={() => validateBlur('name')}
                   value={dataInfoUser.name}
@@ -128,7 +128,7 @@ function EditProfile() {
                 <div className={styles.label}>Email *</div>
                 <InputMASQ
                   type={"text"}
-                  placeholder={"Enter email..."}
+                  placeholder={"Nhập email..."}
                   onChange={(e) => handleChangeInput(e, 'email')}
                   onBlur={() => validateBlur('email')}
                   value={dataInfoUser.email}
@@ -137,10 +137,10 @@ function EditProfile() {
               </div>
 
               <div className={styles.inputWrapper}>
-                <div className={styles.label}>Phone *</div>
+                <div className={styles.label}>Số điện thoại *</div>
                 <InputMASQ
                   type={"text"}
-                  placeholder={"Enter phone..."}
+                  placeholder={"Nhập số điện thoại..."}
                   onChange={(e) => handleChangeInput(e, 'phone')}
                   onBlur={() => validateBlur('phone')}
                   value={dataInfoUser.phone}
@@ -170,14 +170,14 @@ function EditProfile() {
         <Col span={12}>
           <div className={`${styles.personalInformation}`}>
             <div className={styles.headerWrap}>
-              <div className={styles.label}>Change Password</div>
+              <div className={styles.label}>Đổi mật khẩu</div>
             </div>
             <div className={styles.mainWrap}>
               <div className={styles.inputWrapper}>
-                <div className={styles.label}>Current password *</div>
+                <div className={styles.label}>Mật khẩu hiện tại *</div>
                 <InputMASQ
                   type={"password"}
-                  placeholder={"Enter current password..."}
+                  placeholder={"Nhật mật khẩu hiện tại..."}
                   onChange={(e) => handleChangeInput(e, 'currentPassword', 'FORM_CHANGE_PASSWORD')}
                   onBlur={() => validateBlur('currentPassword', 'FORM_CHANGE_PASSWORD')}
                   value={dataChangePassword.currentPassword}
@@ -186,10 +186,10 @@ function EditProfile() {
               </div>
 
               <div className={styles.inputWrapper}>
-                <div className={styles.label}>New password *</div>
+                <div className={styles.label}>Mật khẩu mới *</div>
                 <InputMASQ
                   type={"password"}
-                  placeholder={"Enter new password..."}
+                  placeholder={"Nhập mật khẩu mới..."}
                   onChange={(e) => handleChangeInput(e, 'newPassword', 'FORM_CHANGE_PASSWORD')}
                   onBlur={() => validateBlur('newPassword', 'FORM_CHANGE_PASSWORD')}
                   value={dataChangePassword.newPassword}
@@ -198,10 +198,10 @@ function EditProfile() {
               </div>
 
               <div className={styles.inputWrapper}>
-                <div className={styles.label}>Confirm new password *</div>
+                <div className={styles.label}>Xác nhận mật khẩu mới *</div>
                 <InputMASQ
                   type={"password"}
-                  placeholder={"Enter confirm new password..."}
+                  placeholder={"Xác nhận mật khẩu mới..."}
                   onChange={(e) => handleChangeInput(e, 'confirmPassword', 'FORM_CHANGE_PASSWORD')}
                   onBlur={() => validateBlur('confirmPassword', 'FORM_CHANGE_PASSWORD')}
                   value={dataChangePassword.confirmPassword}
@@ -223,7 +223,7 @@ function EditProfile() {
                   justifyContent: "center",
                   alignItems: "center",
                 }}
-                textBtn={'Save'}>
+                textBtn={'Lưu'}>
               </ButtonMASQ>
             </div>
           </div>

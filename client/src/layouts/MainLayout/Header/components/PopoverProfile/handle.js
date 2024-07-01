@@ -17,6 +17,7 @@ export default function Handle() {
   const authUser = useSelector(state => state.auth.authUser);
   const errorInformation = useSelector(state => state.profile.errorInformation);
   const errorChangePassword = useSelector(state => state.profile.errorChangePassword);
+  const isLoggedIn = useSelector(state => state.auth.isLoggedIn)
 
   const handleConfirmLogout = () => {
     removeAuthToken();
@@ -62,6 +63,7 @@ export default function Handle() {
 
   return {
     isShowInformation, setIsShowInformation, authUser,
-    handleConfirmLogout, handleShowProfile, handleResetError
+    handleConfirmLogout, handleShowProfile, handleResetError,
+    isLoggedIn,
   }
 }

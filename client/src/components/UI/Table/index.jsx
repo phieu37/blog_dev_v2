@@ -41,13 +41,13 @@ function TableMASQ(props) {
         {/* Hiển thị thông tin về số lượng bản ghi */}
         <span className={styles.textPagination}>
           {/* Hiển thị số lượng bản ghi từ */}
-          <span>Showing {(pagination.perPage * (pagination.currentPage - 1)) + 1} to</span>
+          <span>Đang hiển thị {(pagination.perPage * (pagination.currentPage - 1)) + 1} đến</span>
           {/* Hiển thị số lượng bản ghi đến */}
           <span> {pagination.totalPage > (pagination.perPage * pagination.currentPage) ?
             pagination.perPage * pagination.currentPage : pagination.totalPage}
           </span>
           {/* Hiển thị tổng số lượng bản ghi */}
-          <span> of {pagination.totalPage} entries</span>
+          <span> trong {pagination.totalPage} mục</span>
         </span>
 
         {/* Component Pagination từ Ant Design */}

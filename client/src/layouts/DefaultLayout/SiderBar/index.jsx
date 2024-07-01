@@ -61,7 +61,8 @@ function SideBar(props) {
     >
       <div
         onClick={() => navigate('/login')}
-        className={styles.logoWrap}>
+        className={styles.logoWrap}
+      >
         {
           isShowSideBar ?
           <div className={`${styles.imgWrap}`}>
@@ -74,7 +75,8 @@ function SideBar(props) {
 
         <div
           className={`${styles.btnToggleSideBar} ${styles.btnToggleSideBarMobi} ${!isShowSideBar ? styles.btnToggleSideBarClose : ''}`}
-          onClick={() => handleToggleIsShowSideBar()}>
+          onClick={() => handleToggleIsShowSideBar()}
+        >
           <MenuFoldOutlined/>
         </div>
       </div>

@@ -18,19 +18,19 @@ import { getNotification } from "../../../utils/helper"
 import _ from "lodash"
 
 function* loadRouteData() {
-  yield put(setTitlePage("Author"))
+  yield put(setTitlePage("Quản lý tác giả"))
   // yield put(getListAuthor());
 }
 
 function* handleActions() {
   yield takeLatest(createAuthorSuccess, function* () {
-    getNotification("success", "Create author success")
+    getNotification("success", "Tạo mới tác giả thành công")
     yield put(setVisibleModalCreateOrUpdateAuthor(false))
     yield put(getListAuthor());
   })
 
   yield takeLatest(createAuthorFail, function* (action) {
-    console.log('🚀 ~ yieldtakeLatest ~ action:', action)
+    // console.log('🚀 ~ yieldtakeLatest ~ action:', action)
     let status = action.payload.status
     if (status === 400) {
       let errors = action.payload.data.errors
@@ -46,11 +46,11 @@ function* handleActions() {
         })
       )
     }
-    getNotification("error", "Create author fail")
+    getNotification("error", "Tạo mới thất bại")
   })
 
   yield takeLatest(updateAuthorSuccess, function* () {
-    getNotification("success", "Update author success")
+    getNotification("success", "Cập nhật tác giả thành công")
     yield put(setVisibleModalCreateOrUpdateAuthor(false))
     yield put(getListAuthor())
   })
@@ -72,17 +72,17 @@ function* handleActions() {
         })
       )
     }
-    getNotification("error", "Update author fail")
+    getNotification("error", "Cập nhật tác giả thất bại")
   })
 
   yield takeLatest(deleteAuthorSuccess, function* () {
-    getNotification("success", "Delete author success")
+    getNotification("success", "Xóa tác giả thành công")
     yield put(setVisibleModalDeleteAuthor(false))
     yield put(getListAuthor())
   })
 
   yield takeLatest(deleteAuthorFail, function* () {
-    yield call(getNotification, "error", "Failed to delete author.")
+    yield call(getNotification, "error", "Lỗi xóa tác giả.")
   })
 }
 

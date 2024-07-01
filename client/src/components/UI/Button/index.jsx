@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
-import PropTypes from "prop-types";
 import styles from './styles.module.scss';
 
 // kiểm tra kiểu dữ liệu của các props được truyền vào
-ButtonMASQ.prototype = {
-  onClick: PropTypes.func.isRequired,
-  textBtn: PropTypes.string.isRequired,
-  style: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired,
-  disabled: PropTypes.bool.isRequired
-}
 
 // giá trị mặc định cho các props nếu chúng không được truyền vào
 ButtonMASQ.defaultProps = {

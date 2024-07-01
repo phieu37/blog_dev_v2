@@ -1,6 +1,6 @@
 import { LINK_STATIC_URL } from "@/configs";
 import { generatePassword } from "@/utils/helpers";
-import { FileUpload } from "@/utils/types";
+// import { FileUpload } from "@/utils/types";
 import { Admin } from "../models";
 
 export async function create({ name, email, password, phone, avatar, status }) {

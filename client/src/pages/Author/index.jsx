@@ -19,7 +19,8 @@ import AuthorImg from '../../assets/images/user/avatar_default.jpg';
 // import BtnFilter from "../../components/ButtonFilter";
 import { PlusOutlined } from '@ant-design/icons';
 import { formatDate } from '../../utils/helper';
-import parse from 'html-react-parser'
+import { Tooltip } from 'antd';
+// import parse from 'html-react-parser'
 
 function Author() {
   // lấy thông tin người dùng hiện tại từ Redux store(từ state authAuthor trong reducer auth)
@@ -27,7 +28,7 @@ function Author() {
   // mảng chứa các cấu hình cho từng cột trong bảng dữ liệu
   const columns = [
     {
-      title: 'Name',
+      title: 'Họ và tên',
       dataIndex: 'name',  // Tên trường dữ liệu tương ứng trong mỗi bản ghi
       key: 'name',        // key duy nhất để xác định cột
       render: (field, record) =>  // field(giá trị của trường dữ liệu), record(toàn bộ dữ liệu của bản ghi)
@@ -51,18 +52,18 @@ function Author() {
       showSorterTooltip: false,
       sorter: true,
     },
+    // {
+    //   title: 'Bio',
+    //   dataIndex: 'bio',
+    //   key: 'bio',
+    //   render: (field) => <span className={styles.limitedHeight}>{parse(field) || "Đang cập nhật"}</span>,
+    //   defaultSortOrder: '',
+    //   showSorterTooltip: false,
+    //   width: '350px',
+    //   // sorter: true,
+    // },
     {
-      title: 'Bio',
-      dataIndex: 'bio',
-      key: 'bio',
-      render: (field) => <span className={styles.limitedHeight}>{parse(field) || "Đang cập nhật"}</span>,
-      defaultSortOrder: '',
-      showSorterTooltip: false,
-      width: '350px',
-      // sorter: true,
-    },
-    {
-      title: 'Birthday',
+      title: 'Ngày sinh',
       dataIndex: 'birthday',
       key: 'birthday',
       render: (field) => <span>{field ? formatDate(field * 1000) : "Đang cập nhật"}</span>,
@@ -80,7 +81,7 @@ function Author() {
     //   sorter: true,
     // },
     {
-      title: 'Certificates',
+      title: 'Chứng chỉ',
       dataIndex: 'certificate',
       key: 'name',
       render: (field) => <span>{field?.name}</span>,
@@ -89,47 +90,39 @@ function Author() {
       // sorter: true,
     },
     {
-      title: 'Certificates Date',
+      title: 'Ngày cấp',
       dataIndex: 'certificate',
       key: 'date',
       render: (field) => <span>{field?.date ? formatDate(field.date * 1000) : "Đang cập nhật"}</span>,
       defaultSortOrder: '',
       showSorterTooltip: false,
-      width: '150px',
       align: 'center',
+      width: '110px',
       // sorter: true,
     },
     {
-      title: 'Actions',
+      title: 'Hành động',
       key: 'action',
       fixed: 'right',
       align: 'center',
-      width: '80px',
+      width: '110px',
       render: (field, record) => (
         <>
           {
             // kiểm tra quyền sửa/xóa chỉ hiển thị nếu trùng id
             // authAuthor.id !== record.id ?
-            authAuthor.id === record.id ?
-              <div className={styles.btnAction}>
+            <div className={styles.btnAction}>
+              <Tooltip title="Sửa">
                 <div onClick={() => handleEdit(record)} className={styles.btnWrap}>
                   <img src={IconEditTable} alt="icon-edit" />
                 </div>
-                {
-                  // authAuthor.id !== record.id ?
-                  authAuthor.id === record.id ?
-                    <div onClick={() => handleShowConfirmDelete(record)} className={styles.btnWrap}>
-                      <img src={IconDeleteTable} alt="icon-delete" />
-                    </div> : ''
-                }
-                {/* <div className={`switch-table-style-custom ${styles.btnWrap}`}>
-                  <SwitchMASQ
-                    // disabled={true}
-                    // status={record.status}
-                    status={true}
-                  />
-                </div> */}
-              </div> : ''
+              </Tooltip>
+              <Tooltip title="Xóa">
+                <div onClick={() => handleShowConfirmDelete(record)} className={styles.btnWrap}>
+                  <img src={IconDeleteTable} alt="icon-delete" />
+                </div>
+              </Tooltip>
+            </div>
           }
         </>
 
@@ -147,7 +140,7 @@ function Author() {
   // tạo ra các state cục bộ trong functional component
   const [author, setAuthor] = useState({}); // lưu thông tin author được chọn để sửa/xóa
   const [configModal, setConfigModal] = useState({  // lưu cấu hình của modal tạo/cập nhật
-    title: 'Create author',
+    title: 'Tạo mới tác giả',
     type: 'CREATE'
   })
 
@@ -172,7 +165,7 @@ function Author() {
   const handleCreate = () => {
     dispatch(setVisibleModalCreateOrUpdateAuthor(true))
     setConfigModal({
-      title: "Create author",
+      title: "Tạo mới tác giả",
       type: "CREATE"
     })
   }
@@ -183,7 +176,7 @@ function Author() {
     setAuthor(authorSelect)
     dispatch(setVisibleModalCreateOrUpdateAuthor(true))
     setConfigModal({
-      title: "Update author",
+      title: "Cập nhật tác giả",
       type: "UPDATE"
     })
   }
@@ -237,7 +230,7 @@ function Author() {
         <div className={styles.mainWrap}>
           {/* tiêu đề và nút tạo */}
           <div className={styles.headerMainWrap}>
-            <span className={styles.title}>Total pages ({paginationListAuthor.totalPage})</span>
+            <span className={styles.title}>Tổng số mục ({paginationListAuthor.totalPage})</span>
             <div className={styles.btnWrap}>
               <div className={styles.btnWrapIcon}>
                 <PlusOutlined />
@@ -247,7 +240,7 @@ function Author() {
                 style={{
                   minWidth: "120px",
                 }}
-                textBtn={'Create'}
+                textBtn={'Thêm mới'}
               >
               </ButtonMASQ>
             </div>
@@ -257,7 +250,7 @@ function Author() {
           <div className={styles.boxFilterWrap}>
             <div className={styles.inputWrap}>
               <InputMASQ
-                placeholder="Search by name or email"
+                placeholder="Tìm kiếm theo họ và tên hoặc email..."
                 value={dataFilter.keySearch}
                 onChange={(e) => handleSearch(e)}
               />
@@ -308,8 +301,8 @@ function Author() {
         <ModalConfirm
           // loading={isLoadingBtnDeleteAuthor}
           isModalOpen={visibleModalDeleteAuthor}
-          title={`Delete ${author.name}?`}
-          description={`Are you sure you want to delete ${author.name}? Your action can not be undone.`}
+          title={`Xóa ${author.name}?`}
+          description={`Bạn có chắc chắn muốn xóa ${author.name}? Hành động của bạn không thể hoàn tác.`}
           onClose={() => dispatch(setVisibleModalDeleteAuthor(false))}
           onConfirm={() => handleConfirmDeleteAuthor()}
         />

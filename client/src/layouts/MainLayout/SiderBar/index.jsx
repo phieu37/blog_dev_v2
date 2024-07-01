@@ -60,7 +60,7 @@ function SideBar(props) {
       className={`${styles.sideBarWrap} ${!isShowSideBar ? styles.sideBarWrapClose : ''}`}
     >
       <div
-        onClick={() => navigate('/')}
+        onClick={() => navigate('/home')}
         className={styles.logoWrap}>
         {
           isShowSideBar ?

@@ -1,3 +1,5 @@
+@import "src/assets/scss/variables";
+
 .labelWrap {
   margin-bottom: 6px;
 
@@ -11,12 +13,30 @@
 }
 
 .buttonWrap {
+
   display: flex;
   justify-content: center;
 
-  .button {
-    color: white;
-    background-color: black;
-    margin-right: 16px;
+  button {
+    height: 43px;
+    min-width: 198px;
+    margin: 0 3px;
+    text-transform: uppercase;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    background-color: $colorBackgroundButton;
+    color: $colorWhite;
   }
+
+  // display: flex;
+  // justify-content: space-evenly;
+
+  // .button {
+  //   width: 100%;
+  //   color: white;
+  //   background-color: #2B3847;
+  //   // margin-right: 16px;
+  // }
 }

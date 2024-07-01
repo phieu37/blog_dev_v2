@@ -190,7 +190,7 @@ function CreatePost(props) {
 
         <div className={styles.wrapperAuthorCategory}>
           <div className={styles.inputWrapper}>
-            <div className={styles.label}>Thumbnail</div>
+            <div className={styles.label}>Ảnh bìa</div>
             <Upload
               beforeUpload={() => false}
               onChange={handleAvatarUpload}
@@ -202,7 +202,7 @@ function CreatePost(props) {
 
           {/* <div className={styles.inputWrapper}> */}
             <ButtonMASQ
-              textBtn={'Cancel'}
+              textBtn={'Hủy'}
               loading={isLoadingBtnCreateOrUpdatePost}
               onClick={() => handleCancel()}
               disable={false}
@@ -213,7 +213,7 @@ function CreatePost(props) {
               }}
             />
             <ButtonMASQ
-              textBtn={'Save'}
+              textBtn={'Lưu'}
               loading={isLoadingBtnCreateOrUpdatePost}
               onClick={() => handleConfirmCreateOrUpdatePost()}
               disable={false}
@@ -228,9 +228,9 @@ function CreatePost(props) {
 
         <div className={styles.wrapperAuthorCategory}>
           <div className={styles.inputWrapper}>
-            <div className={styles.label}>Author *</div>
+            <div className={styles.label}>Tác giả *</div>
             <Select
-              placeholder={"Enter author..."}
+              placeholder={"Chọn tác giả..."}
               style={{ width: '50%' }}
               allowClear
               value={dataCreateOrUpdate.author?._id}
@@ -241,9 +241,9 @@ function CreatePost(props) {
           </div>
 
           <div className={styles.inputWrapper}>
-            <div className={styles.label}>Category *</div>
+            <div className={styles.label}>Danh mục *</div>
             <Select
-              placeholder={"Enter category..."}
+              placeholder={"Chọn danh mục..."}
               mode="multiple"
               style={{ width: '50%' }}
               allowClear
@@ -257,10 +257,10 @@ function CreatePost(props) {
         </div>
 
         <div className={styles.inputWrapper}>
-          <div className={styles.label}>Title *</div>
+          <div className={styles.label}>Tiêu đề *</div>
           <InputMASQ
             type={"text"}
-            placeholder={"Enter title..."}
+            placeholder={"Nhập tiêu đề..."}
             onChange={(e) => handleChangeInput(e, 'title')}
             // onBlur={() => validateBlur('title')}
             value={dataCreateOrUpdate.title}
@@ -270,7 +270,7 @@ function CreatePost(props) {
 
         <div >
           <div className={styles.inputWrapperContent}>
-            <div className={styles.label}>Content *</div>
+            <div className={styles.label}>Nội dung *</div>
           </div>
           <CustomCKEditor
             // onMouseDown={(e) => e.preventDefault()}

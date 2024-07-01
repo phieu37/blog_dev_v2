@@ -1,6 +1,8 @@
 import {Router} from "express";
 import {asyncHandler} from "@/utils/handlers";
-import {verifyToken, validate, upload} from "../app/middleware/common";
+import {
+    // verifyToken, 
+    validate, upload} from "../app/middleware/common";
 
 import * as postRequest from "../app/requests/post.request";
 import * as postMiddleware from "../app/middleware/post.middleware";
@@ -8,7 +10,7 @@ import * as postController from "../app/controllers/post.controller";
 
 const router = Router();
 
-router.use(asyncHandler(verifyToken));
+// router.use(asyncHandler(verifyToken));
 
 router.get(
     "/",

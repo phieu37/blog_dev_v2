@@ -8,7 +8,6 @@ import ButtonMASQ from "../../components/UI/Button";
 import IconDeleteTable from "../../assets/images/icon/table/delete_14x14.svg";
 import IconEditTable from "../../assets/images/icon/table/edit_12x12.svg";
 import IconDetailTable from "../../assets/images/icon/show_password.svg";
-// import CreateOrUpdate from "./components/CreateOrUpdate";
 import ModalConfirm from "../../components/UI/Modal/ModalConfirm";
 import { useDispatch, useSelector } from "react-redux";
 import { getListPost, handleDeletePost } from "../../api/post";
@@ -24,12 +23,11 @@ import parse from 'html-react-parser'
 import CreatePost from './components/CreatePost'
 
 function Post() {
-  const authAuthor = useSelector(state => state.auth.authAuthor);
   const navigate = useNavigate()
   const [isCreating, setIsCreating] = useState(false);
   const columns = [
     {
-      title: 'Thumbnail',
+      title: 'Ảnh bìa',
       dataIndex: 'thumbnail',
       key: 'thumbnail',
       width: '100px',
@@ -43,7 +41,7 @@ function Post() {
       showSorterTooltip: false,
     },
     {
-      title: 'Title',
+      title: 'Tiêu đề',
       dataIndex: 'title',
       key: 'title',
       render: (field) => <span>{field || "Đang cập nhật"}</span>,
@@ -52,7 +50,7 @@ function Post() {
       sorter: true,
     },
     {
-      title: 'Content',
+      title: 'Nội dung',
       dataIndex: 'content',
       key: 'content',
       render: (field) => <span className={styles.limitedHeight}>{parse(field) || "Đang cập nhật"}</span>,
@@ -61,7 +59,7 @@ function Post() {
       width: '300px',
     },
     {
-      title: 'Author',
+      title: 'Tác giả',
       dataIndex: 'author',
       key: 'name',
       render: (field) => <span>{field.name || "Đang cập nhật"}</span>,
@@ -70,7 +68,7 @@ function Post() {
       sorter: true,
     },
     {
-      title: 'Category',
+      title: 'Danh mục',
       dataIndex: 'categories',
       key: 'categories',
       render: (categories) => (
@@ -83,40 +81,32 @@ function Post() {
       sorter: true,
     },
     {
-      title: 'Actions',
+      title: 'Hành động',
       key: 'action',
       fixed: 'right',
       align: 'center',
-      width: '120px',
+      width: '110px',
       render: (field, record) => (
         <>
-          {
-            authAuthor.id === record.id ?
-              <div className={styles.btnAction}>
-                <Tooltip title="Edit">
-                  <div onClick={() => handleEdit(record)} className={styles.btnWrap}>
-                    <img src={IconEditTable} alt="icon-edit" />
-                  </div>
-                </Tooltip>
-                {
-                  authAuthor.id === record.id &&
-                  <div className={styles.btnWrap}>
-                    <Tooltip title="Delete">
-                      <div onClick={() => handleShowConfirmDelete(record)}>
-                        <img src={IconDeleteTable} alt="icon-delete" />
-                      </div>
-                    </Tooltip>
-                  </div>
-                }
-                {
-                  <Tooltip title="DetailContent">
-                    <div onClick={() => navigate(`/posts/${record._id}`)} className={styles.btnWrap}>
-                      <img className={styles.btnWrapImg} src={IconDetailTable} alt="icon-delete" />
-                    </div>
-                  </Tooltip>
-                }
-              </div> : ''
-          }
+          <div className={styles.btnAction}>
+            <Tooltip title="Sửa">
+              <div onClick={() => handleEdit(record)} className={styles.btnWrap}>
+                <img src={IconEditTable} alt="icon-edit" />
+              </div>
+            </Tooltip>
+            <div className={styles.btnWrap}>
+              <Tooltip title="Xóa">
+                <div onClick={() => handleShowConfirmDelete(record)}>
+                  <img src={IconDeleteTable} alt="icon-delete" />
+                </div>
+              </Tooltip>
+            </div>
+            <Tooltip title="Xem chi tiết">
+              <div onClick={() => navigate(`/posts/${record._id}`)} className={styles.btnWrap}>
+                <img className={styles.btnWrapImg} src={IconDetailTable} alt="icon-delete" />
+              </div>
+            </Tooltip>
+          </div>
         </>
       ),
     },
@@ -230,7 +220,7 @@ function Post() {
             <div className={styles.mainWrap}>
               {/* tiêu đề và nút tạo */}
               <div className={styles.headerMainWrap}>
-                <span className={styles.title}>Total pages ({paginationListPost.totalPage})</span>
+                <span className={styles.title}>Tổng số mục ({paginationListPost.totalPage})</span>
                 <div className={styles.btnWrap}>
                   <div className={styles.btnWrapIcon}>
                     <PlusOutlined />
@@ -240,7 +230,7 @@ function Post() {
                     style={{
                       minWidth: "120px",
                     }}
-                    textBtn={'Create'}
+                    textBtn={'Thêm mới'}
                   >
                   </ButtonMASQ>
                 </div>
@@ -250,7 +240,7 @@ function Post() {
               <div className={styles.boxFilterWrap}>
                 <div className={styles.inputWrap}>
                   <InputMASQ
-                    placeholder="Search by title or author or category"
+                    placeholder="Tìm kiếm theo tiêu đề..."
                     value={dataFilter.keySearch}
                     onChange={(e) => handleSearch(e)}
                   />
@@ -284,8 +274,8 @@ function Post() {
             {/* modal xác nhận xóa người dùng */}
             <ModalConfirm
               isModalOpen={visibleModalDeletePost}
-              title={`Delete ${post.name}?`}
-              description={`Are you sure you want to delete ${post.name}? Your action can not be undone.`}
+              title={`Xóa ${post.title}?`}
+              description={`Bạn có chắc chắn muốn xóa '${post.title}'? Hành động của bạn không thể hoàn tác.`}
               onClose={() => dispatch(setVisibleModalDeletePost(false))}
               onConfirm={() => handleConfirmDeletePost()}
             />

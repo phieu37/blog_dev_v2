@@ -6,21 +6,12 @@ import _ from "lodash";
 import { isValidate } from "../../../../utils/validate";
 import { handleCheckValidateConfirm } from "../../../../utils/helper";
 import ModalGeneral from "../../../../components/UI/Modal/ModalGeneral";
-import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setErrorCreateOrUpdateCategory,
   setVisibleModalCreateOrUpdateCategory
 } from "../../../../states/modules/category";
 import { handleCreateCategory, handleUpdateCategory } from "../../../../api/category";
-
-CreateOrUpdate.prototype = {
-  isModalOpen: PropTypes.bool.isRequired,
-  isLoadingTable: PropTypes.bool.isRequired,
-  configModal: PropTypes.object.isRequired,
-  onClose: PropTypes.func,
-  onConfirm: PropTypes.func,
-}
 
 CreateOrUpdate.defaultProps = {
   isModalOpen: false,
@@ -114,10 +105,10 @@ function CreateOrUpdate(props) {
     >
       <div className={styles.mainModalWrap}>
         <div className={styles.inputWrapper}>
-          <div className={styles.label}>Name *</div>
+          <div className={styles.label}>Tên danh mục *</div>
           <InputMASQ
             type={"text"}
-            placeholder={"Enter email..."}
+            placeholder={"Nhập tên danh mục..."}
             onChange={(e) => handleChangeInput(e, 'name')}
             onBlur={() => validateBlur('name')}
             value={dataCreateOrUpdate.name}
@@ -126,10 +117,10 @@ function CreateOrUpdate(props) {
         </div>
 
         <div className={styles.inputWrapper}>
-          <div className={styles.label}>Description *</div>
+          <div className={styles.label}>Mô tả *</div>
           <InputMASQ
             type={"text"}
-            placeholder={"Enter description..."}
+            placeholder={"Nhập mô tả..."}
             onChange={(e) => handleChangeInput(e, 'description')}
             onBlur={() => validateBlur('description')}
             value={dataCreateOrUpdate.description}
@@ -139,7 +130,7 @@ function CreateOrUpdate(props) {
 
         <div className={styles.btnWrap}>
           <ButtonMASQ
-            textBtn={'Save'}
+            textBtn={'Lưu'}
             loading={isLoadingBtnCreateOrUpdateCategory}
             onClick={() => handleConfirmCreateOrUpdateCategory()}
             disable={false}

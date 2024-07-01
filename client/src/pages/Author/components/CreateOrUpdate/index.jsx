@@ -201,10 +201,10 @@ function CreateOrUpdate(props) {
     >
       <div className={styles.mainModalWrap}>
         <div className={styles.inputWrapper}>
-          <div className={styles.label}>Name *</div>
+          <div className={styles.label}>Họ và tên *</div>
           <InputMASQ
             type={"text"}
-            placeholder={"Enter name..."}
+            placeholder={"Nhập họ và tên..."}
             onChange={(e) => handleChangeInput(e, "name")}
             onBlur={() => validateBlur("name")}
             value={dataCreateOrUpdate.name}
@@ -216,7 +216,7 @@ function CreateOrUpdate(props) {
           <div className={styles.label}>Email *</div>
           <InputMASQ
             type={"text"}
-            placeholder={"Enter email..."}
+            placeholder={"Nhập email..."}
             onChange={(e) => handleChangeInput(e, "email")}
             onBlur={() => validateBlur("email")}
             value={dataCreateOrUpdate.email}
@@ -225,7 +225,7 @@ function CreateOrUpdate(props) {
         </div>
 
         <div className={styles.inputWrapper}>
-          <div className={styles.label}>Bio</div>
+          <div className={styles.label}>Tiểu sử</div>
           <CustomCKEditor
             data={dataCreateOrUpdate.bio || ''}
             onChange={handleCKEditorChange}
@@ -235,9 +235,9 @@ function CreateOrUpdate(props) {
         </div>
 
         <div className={styles.inputWrapper}>
-          <div className={styles.label}>Birthday *</div>
+          <div className={styles.label}>Ngày sinh *</div>
           <DatePickerMSQA
-            placeholder={"Enter birthday..."}
+            placeholder={"Chọn ngày sinh..."}
             onChange={(e) => handleDateChange(e, "birthday")}
             // onBlur={() => validateBlur("birthday")}
             value={dataCreateOrUpdate.birthday ? dayjs.unix(dataCreateOrUpdate.birthday) : undefined}
@@ -258,10 +258,10 @@ function CreateOrUpdate(props) {
         </div> */}
 
         <div className={styles.inputWrapper}>
-          <div className={styles.label}>Certificate Name *</div>
+          <div className={styles.label}>Chứng chỉ *</div>
           <InputMASQ
             type={"text"}
-            placeholder={"Enter certificate..."}
+            placeholder={"Nhập chứng chỉ..."}
             onChange={(e) => handleChangeInput(e, "certificate")}
             onBlur={() => validateBlur("certificate")}
             value={dataCreateOrUpdate.certificate}
@@ -270,9 +270,9 @@ function CreateOrUpdate(props) {
         </div>
 
         <div className={styles.inputWrapper}>
-          <div className={styles.label}>Certificate Date *</div>
+          <div className={styles.label}>Ngày cấp *</div>
           <DatePickerMSQA
-            placeholder={"Enter date..."}
+            placeholder={"Chọn ngày cấp..."}
             onChange={(e) => handleDateChange(e, "date")}
             onBlur={() => validateBlur("date")}
             value={dataCreateOrUpdate.date ? dayjs.unix(dataCreateOrUpdate.date) : undefined}
@@ -281,7 +281,7 @@ function CreateOrUpdate(props) {
         </div>
 
         <div className={styles.inputWrapper}>
-          <div className={styles.label}>Avatar</div>
+          <div className={styles.label}>Ảnh đại diện</div>
           <Upload
             beforeUpload={() => false}
             onChange={handleAvatarUpload}
@@ -295,7 +295,7 @@ function CreateOrUpdate(props) {
 
         <div className={styles.btnWrap}>
           <ButtonMASQ
-            textBtn={"Save"}
+            textBtn={"Lưu"}
             loading={isLoadingBtnCreateOrUpdateAuthor}
             onClick={() => handleConfirmCreateOrUpdateAuthor()}
             disable={false}
